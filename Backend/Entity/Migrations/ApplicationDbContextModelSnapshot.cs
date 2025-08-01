@@ -36,6 +36,9 @@ namespace Entity.Migrations
                     b.Property<int>("Code")
                         .HasColumnType("int");
 
+                    b.Property<int?>("DecksId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Force")
                         .HasColumnType("int");
 
@@ -49,6 +52,8 @@ namespace Entity.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DecksId");
 
                     b.ToTable("Cards");
                 });
@@ -71,8 +76,6 @@ namespace Entity.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CardId");
 
                     b.HasIndex("GamePlayerId");
 
@@ -138,21 +141,22 @@ namespace Entity.Migrations
                     b.ToTable("Rooms");
                 });
 
+            modelBuilder.Entity("Entity.Models.Card", b =>
+                {
+                    b.HasOne("Entity.Models.Deck", "Decks")
+                        .WithMany("Card")
+                        .HasForeignKey("DecksId");
+
+                    b.Navigation("Decks");
+                });
+
             modelBuilder.Entity("Entity.Models.Deck", b =>
                 {
-                    b.HasOne("Entity.Models.Card", "Card")
-                        .WithMany("Decks")
-                        .HasForeignKey("CardId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Entity.Models.GamePlayer", "GamePlayer")
                         .WithMany("Decks")
                         .HasForeignKey("GamePlayerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Card");
 
                     b.Navigation("GamePlayer");
                 });
@@ -176,9 +180,9 @@ namespace Entity.Migrations
                     b.Navigation("Room");
                 });
 
-            modelBuilder.Entity("Entity.Models.Card", b =>
+            modelBuilder.Entity("Entity.Models.Deck", b =>
                 {
-                    b.Navigation("Decks");
+                    b.Navigation("Card");
                 });
 
             modelBuilder.Entity("Entity.Models.GamePlayer", b =>

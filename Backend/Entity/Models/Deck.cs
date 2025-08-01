@@ -14,6 +14,6 @@ namespace Entity.Models
         public bool Active { get; set; }
 
         public GamePlayer? GamePlayer { get; set; }
-        public Card? Card { get; set; }
+        public List<Card>? Card { get; set; }
     }
 }

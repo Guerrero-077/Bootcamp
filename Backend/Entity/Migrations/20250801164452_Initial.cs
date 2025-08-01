@@ -6,29 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Entity.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Cards",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Code = table.Column<int>(type: "int", nullable: false),
-                    Force = table.Column<int>(type: "int", nullable: false),
-                    Speed = table.Column<int>(type: "int", nullable: false),
-                    Popularity = table.Column<int>(type: "int", nullable: false),
-                    Appearances = table.Column<int>(type: "int", nullable: false),
-                    IQ = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Cards", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Players",
                 columns: table => new
@@ -96,12 +78,6 @@ namespace Entity.Migrations
                 {
                     table.PrimaryKey("PK_Decks", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Decks_Cards_CardId",
-                        column: x => x.CardId,
-                        principalTable: "Cards",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_Decks_GamePlayers_GamePlayerId",
                         column: x => x.GamePlayerId,
                         principalTable: "GamePlayers",
@@ -109,10 +85,34 @@ namespace Entity.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Cards",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Code = table.Column<int>(type: "int", nullable: false),
+                    Force = table.Column<int>(type: "int", nullable: false),
+                    Speed = table.Column<int>(type: "int", nullable: false),
+                    Popularity = table.Column<int>(type: "int", nullable: false),
+                    Appearances = table.Column<int>(type: "int", nullable: false),
+                    IQ = table.Column<int>(type: "int", nullable: false),
+                    DecksId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cards", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Cards_Decks_DecksId",
+                        column: x => x.DecksId,
+                        principalTable: "Decks",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.CreateIndex(
-                name: "IX_Decks_CardId",
-                table: "Decks",
-                column: "CardId");
+                name: "IX_Cards_DecksId",
+                table: "Cards",
+                column: "DecksId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Decks_GamePlayerId",
@@ -134,10 +134,10 @@ namespace Entity.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Decks");
+                name: "Cards");
 
             migrationBuilder.DropTable(
-                name: "Cards");
+                name: "Decks");
 
             migrationBuilder.DropTable(
                 name: "GamePlayers");

@@ -1,9 +1,4 @@
 ﻿using Entity.Models.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Entity.Models
 {
@@ -16,6 +11,6 @@ namespace Entity.Models
         public int Appearances { get; set; }
         public int IQ { get; set; }
 
-        public List<Deck> Decks { get; set; }
+        public Deck? Decks { get; set; }
     }
 }
