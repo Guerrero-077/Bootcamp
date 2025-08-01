@@ -1,13 +1,14 @@
 ﻿using Business.Interfases;
 using Data.Interfases;
 using Entity.Models.Base;
+using Mapster;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business.Implementations
+namespace Business.Implementations.Base
 {
     public class BaseBusiness<T, D> : IBaseBusiness<T, D> where T : BaseModel where D : BaseModel
     {
@@ -18,7 +19,7 @@ namespace Business.Implementations
             _data = data;
         }
 
-        public async Task<int> Delete(int id)
+        public async Task<int?> Delete(int id)
         {
             try
             {
@@ -35,7 +36,8 @@ namespace Business.Implementations
         {
             try
             {
-                return await _data.GetAll();
+                var lista = await _data.GetAll();
+                return lista.Adapt<IEnumerable<D>>();
             }
             catch (Exception ex)
             {
@@ -47,7 +49,8 @@ namespace Business.Implementations
         {
             try
             {
-                return await _data.GetById(id);
+                var entity = await _data.GetById(id);
+                return entity.Adapt<D>();
             }
             catch (Exception ex)
             {
@@ -59,7 +62,9 @@ namespace Business.Implementations
         {
             try
             {
-                return await _data.Save(entity);
+                var entityNew = entity.Adapt<T>();
+                await _data.Save(entityNew);
+                return entityNew.Adapt<D>();
             }
             catch (Exception ex)
             {
@@ -74,7 +79,9 @@ namespace Business.Implementations
 
             try
             {
-                return await _data.Update(entity);
+                var entityUpdate = entity.Adapt<T>();
+                await _data.Update(entityUpdate);
+                return entityUpdate.Adapt<D>();
             }
             catch (Exception ex)
             {

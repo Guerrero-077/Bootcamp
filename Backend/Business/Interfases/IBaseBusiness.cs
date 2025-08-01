@@ -12,6 +12,6 @@ namespace Business.Interfases
         Task<D> GetById(int id);
         Task<D> Save(D entity);
         Task<D> Update(D entity);
-        Task<int> Delete(int id);
+        Task<int?> Delete(int id);
     }
 }

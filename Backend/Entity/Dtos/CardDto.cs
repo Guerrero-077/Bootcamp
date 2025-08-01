@@ -15,5 +15,8 @@ namespace Entity.Dtos
         public int Popularity { get; set; }
         public int Appearances { get; set; }
         public int IQ { get; set; }
+
+        public int DeckId { get; set; }
+
     }
 }

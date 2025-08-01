@@ -11,6 +11,8 @@ namespace Entity.Models
         public int Appearances { get; set; }
         public int IQ { get; set; }
 
+        public int DeckId { get; set; }
+
         public Deck? Decks { get; set; }
     }
 }

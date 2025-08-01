@@ -42,7 +42,7 @@ namespace Data.Repository
             return entity;
         }
 
-        public async Task<int?> DeleteById(int id)
+        public async Task<int?> Delete(int id)
         {
             var entity = await _dbSet.FirstOrDefaultAsync(e => e.Id == id);
             if (entity == null) return null;

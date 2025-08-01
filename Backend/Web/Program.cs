@@ -1,6 +1,13 @@
 
+using Business.Implementations;
+using Business.Interfases;
+using Data.Implements;
+using Data.Interfases;
 using Entity.Conetxt;
+using Entity.Dtos;
+using Entity.Models;
 using Microsoft.EntityFrameworkCore;
+using Utilities.Mapper;
 using Web.Hubs;
 
 namespace Web
@@ -37,6 +44,13 @@ namespace Web
                     .AllowCredentials()
                     );
             });
+
+            Mapping.MappingConfiguration();
+
+
+            builder.Services.AddScoped<IBaseData<Player>, PlayerRepository>();
+            builder.Services.AddScoped<IBaseBusiness<Player, PlayerDto>, PlayerBusiness>();
+
 
             var app = builder.Build();
 

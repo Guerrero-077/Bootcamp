@@ -10,7 +10,6 @@ namespace Entity.Models
     public class Deck : BaseModel
     {
         public int GamePlayerId { get; set; }
-        public int CardId { get; set; }
         public bool Active { get; set; }
 
         public GamePlayer? GamePlayer { get; set; }

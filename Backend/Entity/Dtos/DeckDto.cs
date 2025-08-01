@@ -11,8 +11,6 @@ namespace Entity.Dtos
     {
         public int GamePlayerId { get; set; }
 
-        public int CardId { get; set; }
-        public int cardCode { get; set; }
 
         public bool Active { get; set; }
     }

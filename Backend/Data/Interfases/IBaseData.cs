@@ -8,6 +8,6 @@ namespace Data.Interfases
         Task<T?> GetById(int id);
         Task<T> Save(T entity);
         Task<T?> Update(T entity);
-        Task<int?> DeleteById(int id);
+        Task<int?> Delete(int id);
     }
 }
