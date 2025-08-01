@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Business.Interfases
 {
-    internal interface IBaseBusiness
+    public interface IBaseBusiness<T, D>
     {
+        Task<IEnumerable<D>> GetAll();
+        Task<D> GetById(int id);
+        Task<D> Save(D entity);
+        Task<D> Update(D entity);
+        Task<int> Delete(int id);
     }
 }
