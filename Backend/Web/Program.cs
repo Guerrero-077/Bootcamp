@@ -8,6 +8,7 @@ using Entity.Dtos;
 using Entity.Models;
 using Microsoft.EntityFrameworkCore;
 using Utilities.Mapper;
+using Web.Extensions;
 using Web.Hubs;
 
 namespace Web
@@ -17,6 +18,7 @@ namespace Web
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            var configuration = builder.Configuration;
 
             // Add services to the container.
 
@@ -27,14 +29,15 @@ namespace Web
 
             builder.Services.AddSignalR();
 
-            var connection = builder.Configuration.GetConnectionString("DefaultConnection");
 
+            // Connection
+            var connection = configuration.GetConnectionString("DefaultConnection");
 
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connection)
             );
 
-
+            // Configuration Cors
             builder.Services.AddCors(options =>
             {
                 options.AddDefaultPolicy(policy =>
@@ -45,11 +48,11 @@ namespace Web
                     );
             });
 
+            //Mapping
             Mapping.MappingConfiguration();
 
-
-            builder.Services.AddScoped<IBaseData<Player>, PlayerRepository>();
-            builder.Services.AddScoped<IBaseBusiness<Player, PlayerDto>, PlayerBusiness>();
+            //Extensions for Scoped
+            builder.Services.AddProjectServices();
 
 
             var app = builder.Build();

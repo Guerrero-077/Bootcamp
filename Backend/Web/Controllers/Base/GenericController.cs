@@ -17,9 +17,9 @@ namespace Web.Controllers.Base
         }
 
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var result = _business.GetAll();
+            var result = await _business.GetAll();
             return Ok(result);
         }
 
@@ -51,7 +51,7 @@ namespace Web.Controllers.Base
             }
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
         public async Task<IActionResult> Put([FromBody] D entity)
         {
             try
