@@ -1,19 +1,32 @@
 ﻿using Business.Implementations.Base;
+using Business.Interfases;
 using Data.Interfases;
 using Entity.Dtos;
 using Entity.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Mapster;
 
 namespace Business.Implementations
 {
-    public class DeckBusiness : BaseBusiness<Deck, DeckDto>
+    public class DeckBusiness : BaseBusiness<Deck, DeckDto>, IDeckService
     {
-        public DeckBusiness(IBaseData<Deck> data) : base(data)
+
+        private readonly IDeckRepository _deckRepository;
+        public DeckBusiness(IDeckRepository data) : base(data)
         {
+            _deckRepository = data;
+        }
+
+        public async Task<IEnumerable<DeckDto>> GetDecksAsync()
+        {
+            var decks = await _deckRepository.GetDeckWithUserCard();
+
+            return decks.Adapt<IEnumerable<DeckDto>>();
+        }
+
+        public async Task<IEnumerable<DeckDto>> GetDecksByPlayerAsync(int playerId)
+        {
+            var decks = await _deckRepository.GetDecksByPlayerIdAsync(playerId);
+            return decks.Adapt<IEnumerable<DeckDto>>();
         }
     }
 }

@@ -1,11 +1,10 @@
 export interface CardModel {
-    id: number;
-    url: string;
-    force: number;
-    speed: number;
-    popularity: number;
+    id:          number;
+    url:         string;
+    force:       number;
+    speed:       number;
+    popularity:  number;
     appearances: number;
-    resistance: number;
-    iq: number;
-    deckId: number;
+    iq:          number;
+    resistance:  number;
 }

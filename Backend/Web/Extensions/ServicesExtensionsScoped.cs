@@ -2,6 +2,7 @@
 using Business.Interfases;
 using Data.Implements;
 using Data.Interfases;
+using Data.Repository;
 using Entity.Dtos;
 using Entity.Models;
 
@@ -11,21 +12,24 @@ namespace Web.Extensions
     {
         public static IServiceCollection AddProjectServices(this IServiceCollection services)
         {
+            services.AddScoped(typeof(IBaseData<>), typeof(BaseData<>));
+
+
 
             //Player 
             services.AddScoped<IBaseData<Player>, PlayerRepository>();
             services.AddScoped<IBaseBusiness<Player, PlayerDto>, PlayerBusiness>();
 
             //Room 
-            services.AddScoped<IBaseData<Room>, RoomRepository>();
-            services.AddScoped<IBaseBusiness<Room, RoomDto>, RoomBusiness>();
+            services.AddScoped<IRoomRepository, RoomRepository>();
+            services.AddScoped <IRoomService, RoomBusiness>();
 
             //Deck
-            services.AddScoped<IBaseData<Deck>, DeckRepositoriy>();
-            services.AddScoped<IBaseBusiness<Deck, DeckDto>, DeckBusiness>();
+            services.AddScoped<IDeckRepository, DeckRepositoriy>();
+            services.AddScoped<IDeckService, DeckBusiness>();
 
             //Card
-            services.AddScoped<IBaseData<Card>, CardRepository>();
+            services.AddScoped<ICardRepository, CardRepository>();
             services.AddScoped<IBaseBusiness<Card, CardDto>, CardBusiness>();
 
             //GamePlayer

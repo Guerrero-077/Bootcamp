@@ -1,33 +1,33 @@
 <div class="player-card">
+    <!-- Puntuación -->
     <div class="score-section">
         <span class="star">⭐</span>
-        <span class="score">{{ player.score }}</span>
+        <!-- <span class="score">{{ player.score }}</span> -->
     </div>
 
+    <!-- Info del jugador -->
     <div class="player-info">
         <div class="avatar">
-            <img [src]="player.avatar || '/perfil.png'" [alt]="player.name + ' avatar'" class="avatar-img">
+            <img [src]="'/perfil.png'" [alt]="player.name + ' avatar'" class="avatar-img">
         </div>
-
         <div class="name-badge">
-            {{ player.position }}. {{ player.name }}
+            {{ player.name }}
         </div>
     </div>
 
+    <!-- Cartas decorativas (ocultas) -->
     <div class="cards-section">
         <div class="cards-container">
-            <div class="card" *ngFor="let card of getCards(); let i = index" [style.z-index]="getCards().length - i"
-                [style.left.px]="i * 8" (click)="openCardModal(card)">
-                {{ player.cardCount }}
+            <div class="card" *ngFor="let i of getCards(); let index = index"
+                [style.z-index]="getCards().length - index" [style.left.px]="index * 8" (click)="openCardModal()">
+                🂠
             </div>
         </div>
     </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal con cartas reales -->
 <app-simple-modal-component [visible]="modalVisible" (close)="closeModal()">
-    <h3>Cartas del jugador</h3>
-
-    <!-- Scroll horizontal y ancho limitado -->
+    <h3>Cartas de {{ player.name }}</h3>
     <app-card-component [cards]="cards" layout="horizontal"></app-card-component>
 </app-simple-modal-component>

@@ -1,4 +1,4 @@
-﻿using Data.Interfases;
+﻿    using Data.Interfases;
 using Data.Repository;
 using Entity.Conetxt;
 using Entity.Models;

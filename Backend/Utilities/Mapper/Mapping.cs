@@ -15,9 +15,12 @@ namespace Utilities.Mapper
         {
             TypeAdapterConfig<CardDto, Card>.NewConfig().TwoWays();
             TypeAdapterConfig<PlayerDto, Player>.NewConfig().TwoWays();
-            TypeAdapterConfig<RoomDto, Room>.NewConfig().TwoWays();
+            //TypeAdapterConfig<GamePlayerDto, GamePlayer>.NewConfig().TwoWays();
+
+            TypeAdapterConfig<GamePlayer, GamePlayerWithCardsDto>.NewConfig().TwoWays();
+
             TypeAdapterConfig<DeckDto, Deck>.NewConfig().TwoWays();
-            TypeAdapterConfig<GamePlayerDto, GamePlayer>.NewConfig().TwoWays();
+            TypeAdapterConfig<RoomDto, Room>.NewConfig().TwoWays();
 
         }
 

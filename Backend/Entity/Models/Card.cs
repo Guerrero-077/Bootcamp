@@ -12,8 +12,9 @@ namespace Entity.Models
         public int Resistance { get; set; }
         public int IQ { get; set; }
 
-        public int? DeckId { get; set; }
+        //public int? DeckId { get; set; }
 
-        public Deck? Decks { get; set; }
+        public List<Deck>? Decks { get; set; }
+
     }
 }

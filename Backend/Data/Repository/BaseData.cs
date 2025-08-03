@@ -8,8 +8,8 @@ namespace Data.Repository
     public class BaseData<T> : IBaseData<T> where T : BaseModel
     {
 
-        private readonly ApplicationDbContext _context;
-        private readonly DbSet<T> _dbSet;
+        protected readonly ApplicationDbContext _context;
+        protected readonly DbSet<T> _dbSet;
         public BaseData(ApplicationDbContext context)
         {
             _context = context;

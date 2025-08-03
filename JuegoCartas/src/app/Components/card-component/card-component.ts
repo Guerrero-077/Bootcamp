@@ -16,14 +16,14 @@ export class CardComponent {
   @Input() layout: 'grid' | 'horizontal' = 'grid';
 
 
-  private readonly cardService = inject(CardService);
+  // private readonly cardService = inject(CardService);
 
-  ngOnInit(): void {
-    if (!this.cards) {
-      this.cardService.getAll().subscribe({
-        next: (data) => (this.cards = data),
-        error: (err) => console.error('Error al cargar cartas', err),
-      });
-    }
-  }
+  // ngOnInit(): void {
+  //   if (!this.cards) {
+  //     this.cardService.getAll().subscribe({
+  //       next: (data) => (this.cards = data),
+  //       error: (err) => console.error('Error al cargar cartas', err),
+  //     });
+  //   }
+  // }
 }

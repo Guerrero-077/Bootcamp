@@ -9,10 +9,13 @@ namespace Entity.Models
 {
     public class Deck : BaseModel
     {
-        public int GamePlayerId { get; set; }
         public bool Active { get; set; }
 
+        public int GamePlayerId { get; set; }
         public GamePlayer? GamePlayer { get; set; }
-        public List<Card>? Card { get; set; }
+        //public List<Card>? Card { get; set; }
+
+        public int CardId { get; set; }
+        public Card? Card { get; set; }
     }
 }
