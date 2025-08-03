@@ -1,0 +1,12 @@
+<div class="card-container">
+    <mat-card class="game-card" *ngFor="let card of cards">
+        <img mat-card-image [src]="card.url" alt="Card image" />
+        <mat-card-content>
+            <h2>IQ: {{ card.iq }}</h2>
+            <p>Fuerza: {{ card.force }}</p>
+            <p>Velocidad: {{ card.speed }}</p>
+            <p>Popularidad: {{ card.popularity }}</p>
+            <p>Apariciones: {{ card.appearances }}</p>
+        </mat-card-content>
+    </mat-card>
+</div>
