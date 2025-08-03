@@ -33,10 +33,7 @@ namespace Entity.Migrations
                     b.Property<int>("Appearances")
                         .HasColumnType("int");
 
-                    b.Property<int>("Code")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DeckId")
+                    b.Property<int?>("DeckId")
                         .HasColumnType("int");
 
                     b.Property<int>("Force")
@@ -48,14 +45,639 @@ namespace Entity.Migrations
                     b.Property<int>("Popularity")
                         .HasColumnType("int");
 
+                    b.Property<int>("Resistance")
+                        .HasColumnType("int");
+
                     b.Property<int>("Speed")
                         .HasColumnType("int");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("DeckId");
 
                     b.ToTable("Cards");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Appearances = 33,
+                            Force = 52,
+                            IQ = 59,
+                            Popularity = 46,
+                            Resistance = 53,
+                            Speed = 45,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img1.png"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Appearances = 36,
+                            Force = 59,
+                            IQ = 63,
+                            Popularity = 52,
+                            Resistance = 56,
+                            Speed = 50,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img2.png"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Appearances = 39,
+                            Force = 66,
+                            IQ = 67,
+                            Popularity = 58,
+                            Resistance = 60,
+                            Speed = 55,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img3.png"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Appearances = 42,
+                            Force = 73,
+                            IQ = 71,
+                            Popularity = 64,
+                            Resistance = 64,
+                            Speed = 60,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img4.png"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Appearances = 45,
+                            Force = 80,
+                            IQ = 75,
+                            Popularity = 70,
+                            Resistance = 68,
+                            Speed = 65,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img5.png"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Appearances = 48,
+                            Force = 87,
+                            IQ = 79,
+                            Popularity = 76,
+                            Resistance = 72,
+                            Speed = 70,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img6.png"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Appearances = 51,
+                            Force = 94,
+                            IQ = 83,
+                            Popularity = 82,
+                            Resistance = 76,
+                            Speed = 75,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img7.png"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Appearances = 54,
+                            Force = 45,
+                            IQ = 87,
+                            Popularity = 88,
+                            Resistance = 62,
+                            Speed = 80,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img8.png"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Appearances = 57,
+                            Force = 52,
+                            IQ = 56,
+                            Popularity = 94,
+                            Resistance = 57,
+                            Speed = 85,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img9.png"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Appearances = 60,
+                            Force = 59,
+                            IQ = 60,
+                            Popularity = 40,
+                            Resistance = 60,
+                            Speed = 40,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img10.png"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Appearances = 63,
+                            Force = 66,
+                            IQ = 64,
+                            Popularity = 46,
+                            Resistance = 62,
+                            Speed = 45,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img11.png"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Appearances = 66,
+                            Force = 73,
+                            IQ = 68,
+                            Popularity = 52,
+                            Resistance = 65,
+                            Speed = 50,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img12.png"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Appearances = 69,
+                            Force = 80,
+                            IQ = 72,
+                            Popularity = 58,
+                            Resistance = 68,
+                            Speed = 55,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img13.png"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Appearances = 72,
+                            Force = 87,
+                            IQ = 76,
+                            Popularity = 64,
+                            Resistance = 71,
+                            Speed = 60,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img14.png"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Appearances = 30,
+                            Force = 94,
+                            IQ = 80,
+                            Popularity = 70,
+                            Resistance = 74,
+                            Speed = 65,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img15.png"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Appearances = 33,
+                            Force = 45,
+                            IQ = 84,
+                            Popularity = 76,
+                            Resistance = 60,
+                            Speed = 70,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img16.png"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Appearances = 36,
+                            Force = 52,
+                            IQ = 88,
+                            Popularity = 82,
+                            Resistance = 63,
+                            Speed = 75,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img17.png"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Appearances = 39,
+                            Force = 59,
+                            IQ = 57,
+                            Popularity = 88,
+                            Resistance = 59,
+                            Speed = 80,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img18.png"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Appearances = 42,
+                            Force = 66,
+                            IQ = 61,
+                            Popularity = 94,
+                            Resistance = 61,
+                            Speed = 85,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img19.png"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Appearances = 45,
+                            Force = 73,
+                            IQ = 65,
+                            Popularity = 40,
+                            Resistance = 69,
+                            Speed = 40,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img20.png"
+                        },
+                        new
+                        {
+                            Id = 21,
+                            Appearances = 48,
+                            Force = 80,
+                            IQ = 69,
+                            Popularity = 46,
+                            Resistance = 65,
+                            Speed = 45,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img21.png"
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Appearances = 51,
+                            Force = 87,
+                            IQ = 73,
+                            Popularity = 52,
+                            Resistance = 68,
+                            Speed = 50,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img22.png"
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Appearances = 54,
+                            Force = 94,
+                            IQ = 77,
+                            Popularity = 58,
+                            Resistance = 71,
+                            Speed = 55,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img23.png"
+                        },
+                        new
+                        {
+                            Id = 24,
+                            Appearances = 57,
+                            Force = 45,
+                            IQ = 81,
+                            Popularity = 64,
+                            Resistance = 64,
+                            Speed = 60,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img24.png"
+                        },
+                        new
+                        {
+                            Id = 25,
+                            Appearances = 60,
+                            Force = 52,
+                            IQ = 85,
+                            Popularity = 70,
+                            Resistance = 67,
+                            Speed = 65,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img25.png"
+                        },
+                        new
+                        {
+                            Id = 26,
+                            Appearances = 63,
+                            Force = 59,
+                            IQ = 66,
+                            Popularity = 76,
+                            Resistance = 60,
+                            Speed = 70,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img26.png"
+                        },
+                        new
+                        {
+                            Id = 27,
+                            Appearances = 66,
+                            Force = 66,
+                            IQ = 70,
+                            Popularity = 82,
+                            Resistance = 63,
+                            Speed = 75,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img27.png"
+                        },
+                        new
+                        {
+                            Id = 28,
+                            Appearances = 69,
+                            Force = 73,
+                            IQ = 74,
+                            Popularity = 88,
+                            Resistance = 66,
+                            Speed = 80,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img28.png"
+                        },
+                        new
+                        {
+                            Id = 29,
+                            Appearances = 72,
+                            Force = 80,
+                            IQ = 78,
+                            Popularity = 94,
+                            Resistance = 69,
+                            Speed = 85,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img29.png"
+                        },
+                        new
+                        {
+                            Id = 30,
+                            Appearances = 30,
+                            Force = 87,
+                            IQ = 82,
+                            Popularity = 40,
+                            Resistance = 72,
+                            Speed = 40,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img30.png"
+                        },
+                        new
+                        {
+                            Id = 31,
+                            Appearances = 33,
+                            Force = 94,
+                            IQ = 86,
+                            Popularity = 46,
+                            Resistance = 75,
+                            Speed = 45,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img31.png"
+                        },
+                        new
+                        {
+                            Id = 32,
+                            Appearances = 36,
+                            Force = 45,
+                            IQ = 90,
+                            Popularity = 52,
+                            Resistance = 62,
+                            Speed = 50,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img32.png"
+                        },
+                        new
+                        {
+                            Id = 33,
+                            Appearances = 39,
+                            Force = 52,
+                            IQ = 61,
+                            Popularity = 58,
+                            Resistance = 65,
+                            Speed = 55,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img33.png"
+                        },
+                        new
+                        {
+                            Id = 34,
+                            Appearances = 42,
+                            Force = 59,
+                            IQ = 65,
+                            Popularity = 64,
+                            Resistance = 68,
+                            Speed = 60,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img34.png"
+                        },
+                        new
+                        {
+                            Id = 35,
+                            Appearances = 45,
+                            Force = 66,
+                            IQ = 69,
+                            Popularity = 70,
+                            Resistance = 71,
+                            Speed = 65,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img35.png"
+                        },
+                        new
+                        {
+                            Id = 36,
+                            Appearances = 48,
+                            Force = 73,
+                            IQ = 73,
+                            Popularity = 76,
+                            Resistance = 74,
+                            Speed = 70,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img36.png"
+                        },
+                        new
+                        {
+                            Id = 37,
+                            Appearances = 51,
+                            Force = 80,
+                            IQ = 77,
+                            Popularity = 82,
+                            Resistance = 77,
+                            Speed = 75,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img37.png"
+                        },
+                        new
+                        {
+                            Id = 38,
+                            Appearances = 54,
+                            Force = 87,
+                            IQ = 81,
+                            Popularity = 88,
+                            Resistance = 80,
+                            Speed = 80,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img38.png"
+                        },
+                        new
+                        {
+                            Id = 39,
+                            Appearances = 57,
+                            Force = 94,
+                            IQ = 85,
+                            Popularity = 94,
+                            Resistance = 83,
+                            Speed = 85,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img39.png"
+                        },
+                        new
+                        {
+                            Id = 40,
+                            Appearances = 60,
+                            Force = 45,
+                            IQ = 89,
+                            Popularity = 40,
+                            Resistance = 66,
+                            Speed = 40,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img40.png"
+                        },
+                        new
+                        {
+                            Id = 41,
+                            Appearances = 63,
+                            Force = 52,
+                            IQ = 93,
+                            Popularity = 46,
+                            Resistance = 69,
+                            Speed = 45,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img41.png"
+                        },
+                        new
+                        {
+                            Id = 42,
+                            Appearances = 66,
+                            Force = 59,
+                            IQ = 66,
+                            Popularity = 52,
+                            Resistance = 72,
+                            Speed = 50,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img42.png"
+                        },
+                        new
+                        {
+                            Id = 43,
+                            Appearances = 69,
+                            Force = 66,
+                            IQ = 70,
+                            Popularity = 58,
+                            Resistance = 75,
+                            Speed = 55,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img43.png"
+                        },
+                        new
+                        {
+                            Id = 44,
+                            Appearances = 72,
+                            Force = 73,
+                            IQ = 74,
+                            Popularity = 64,
+                            Resistance = 78,
+                            Speed = 60,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img44.png"
+                        },
+                        new
+                        {
+                            Id = 45,
+                            Appearances = 30,
+                            Force = 80,
+                            IQ = 78,
+                            Popularity = 70,
+                            Resistance = 81,
+                            Speed = 65,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img45.png"
+                        },
+                        new
+                        {
+                            Id = 46,
+                            Appearances = 33,
+                            Force = 87,
+                            IQ = 82,
+                            Popularity = 76,
+                            Resistance = 84,
+                            Speed = 70,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img46.png"
+                        },
+                        new
+                        {
+                            Id = 47,
+                            Appearances = 36,
+                            Force = 94,
+                            IQ = 86,
+                            Popularity = 82,
+                            Resistance = 87,
+                            Speed = 75,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img47.png"
+                        },
+                        new
+                        {
+                            Id = 48,
+                            Appearances = 39,
+                            Force = 45,
+                            IQ = 90,
+                            Popularity = 88,
+                            Resistance = 70,
+                            Speed = 80,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img48.png"
+                        },
+                        new
+                        {
+                            Id = 49,
+                            Appearances = 42,
+                            Force = 52,
+                            IQ = 62,
+                            Popularity = 94,
+                            Resistance = 73,
+                            Speed = 85,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img49.png"
+                        },
+                        new
+                        {
+                            Id = 50,
+                            Appearances = 45,
+                            Force = 59,
+                            IQ = 66,
+                            Popularity = 40,
+                            Resistance = 76,
+                            Speed = 40,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img50.png"
+                        },
+                        new
+                        {
+                            Id = 51,
+                            Appearances = 48,
+                            Force = 66,
+                            IQ = 70,
+                            Popularity = 46,
+                            Resistance = 79,
+                            Speed = 45,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img51.png"
+                        },
+                        new
+                        {
+                            Id = 52,
+                            Appearances = 51,
+                            Force = 73,
+                            IQ = 74,
+                            Popularity = 52,
+                            Resistance = 82,
+                            Speed = 50,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img52.png"
+                        },
+                        new
+                        {
+                            Id = 53,
+                            Appearances = 54,
+                            Force = 80,
+                            IQ = 78,
+                            Popularity = 58,
+                            Resistance = 85,
+                            Speed = 55,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img53.png"
+                        },
+                        new
+                        {
+                            Id = 54,
+                            Appearances = 57,
+                            Force = 87,
+                            IQ = 82,
+                            Popularity = 64,
+                            Resistance = 88,
+                            Speed = 60,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img54.png"
+                        },
+                        new
+                        {
+                            Id = 55,
+                            Appearances = 60,
+                            Force = 94,
+                            IQ = 86,
+                            Popularity = 70,
+                            Resistance = 91,
+                            Speed = 65,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img55.png"
+                        },
+                        new
+                        {
+                            Id = 56,
+                            Appearances = 63,
+                            Force = 45,
+                            IQ = 69,
+                            Popularity = 76,
+                            Resistance = 58,
+                            Speed = 70,
+                            Url = "https://guerrero-077.github.io/imagenes/img/img56.png"
+                        });
                 });
 
             modelBuilder.Entity("Entity.Models.Deck", b =>
@@ -142,9 +764,7 @@ namespace Entity.Migrations
                 {
                     b.HasOne("Entity.Models.Deck", "Decks")
                         .WithMany("Card")
-                        .HasForeignKey("DeckId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DeckId");
 
                     b.Navigation("Decks");
                 });
