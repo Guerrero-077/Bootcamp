@@ -1,0 +1,87 @@
+.card-container-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.card-container-horizontal {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-width: 100%;
+    padding: 1rem 0;
+    gap: 1rem;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    box-sizing: border-box;
+}
+
+.game-card {
+    width: 180px;
+    height: 250px;
+    flex: 0 0 auto;
+    transition: transform 0.2s ease-in-out;
+    border-radius: 12px;
+    background-image: url('/fondo.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.game-card:hover {
+    transform: scale(1.05);
+}
+
+mat-card-content {
+    padding: 1rem;
+}
+
+.game-card-img {
+    height: 130px;
+    object-fit: cover;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    margin: 0;
+    padding: 0;
+    width: 100px;
+    justify-content: center;
+    gap: 5px;
+}
+
+.texto {
+    color: white;
+    font-size: 8px;
+    margin: 0;
+    padding: 0;
+    width: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #534D4D;
+    opacity: 81;
+    border-radius: 2px;
+    box-shadow: 2px 1px 0 #FFD633;
+}
+
+.card-container-horizontal {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-width: 1000px;
+    padding: 1rem 0;
+    gap: 1rem;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    box-sizing: border-box;
+}

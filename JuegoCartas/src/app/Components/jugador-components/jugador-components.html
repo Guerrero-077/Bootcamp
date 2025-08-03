@@ -1,0 +1,33 @@
+<div class="player-card">
+    <div class="score-section">
+        <span class="star">⭐</span>
+        <span class="score">{{ player.score }}</span>
+    </div>
+
+    <div class="player-info">
+        <div class="avatar">
+            <img [src]="player.avatar || '/perfil.png'" [alt]="player.name + ' avatar'" class="avatar-img">
+        </div>
+
+        <div class="name-badge">
+            {{ player.position }}. {{ player.name }}
+        </div>
+    </div>
+
+    <div class="cards-section">
+        <div class="cards-container">
+            <div class="card" *ngFor="let card of getCards(); let i = index" [style.z-index]="getCards().length - i"
+                [style.left.px]="i * 8" (click)="openCardModal(card)">
+                {{ player.cardCount }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<app-simple-modal-component [visible]="modalVisible" (close)="closeModal()">
+    <h3>Cartas del jugador</h3>
+
+    <!-- Scroll horizontal y ancho limitado -->
+    <app-card-component [cards]="cards" layout="horizontal"></app-card-component>
+</app-simple-modal-component>
