@@ -1,5 +1,6 @@
-﻿using Data.Interfases;
-using Entity.Conetxt;
+﻿
+using Data.Interfases;
+using Entity.Context;
 using Entity.Models.Base;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,10 +17,10 @@ namespace Data.Repository
             _dbSet = context.Set<T>();
 
         }
-        public async Task<IEnumerable<T>> GetAll()
-        {
-             return await _dbSet.ToListAsync();
-        }
+            public async Task<IEnumerable<T>> GetAll()
+            {
+                 return await _dbSet.ToListAsync();
+            }
 
         public async Task<T?> GetById(int id)
         {

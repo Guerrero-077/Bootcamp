@@ -1,15 +1,7 @@
-
-using Business.Implementations;
-using Business.Interfases;
-using Data.Implements;
-using Data.Interfases;
-using Entity.Conetxt;
-using Entity.Dtos;
-using Entity.Models;
+using Entity.Context;
 using Microsoft.EntityFrameworkCore;
 using Utilities.Mapper;
 using Web.Extensions;
-using Web.Hubs;
 
 namespace Web
 {
@@ -74,7 +66,7 @@ namespace Web
 
 
             app.MapControllers();
-            app.MapHub<Game>("/gamehub");
+            app.MapHub<Hubs.Game>("/gamehub");
 
 
             app.Run();

@@ -1,11 +1,22 @@
 import { CardModel } from "./Cards.models";
-import { GamePlayer } from "./GamePlayer.models";
+import { GamePlayerModel } from "./GamePlayer.models";
 
 export interface DeckModel {
+    id: number;
     gamePlayerId: number;
-    cardId: number;
+    playerName: string;
     active: boolean;
     card: CardModel;
-    gamePlayer: GamePlayer;
-    id: number;
+    gamePlayer: GamePlayerModel;
+    // cardId: number;
+    // url: string;
 }
+
+// export interface DeckModel {
+//     id: number;
+//     gamePlayerId: number;
+//     playerName: string;
+//     cardId: number;
+//     url: string;
+//     used: boolean;
+// }

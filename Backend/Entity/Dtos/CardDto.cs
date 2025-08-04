@@ -4,7 +4,7 @@
     {
         public class CardDto : BaseModel
         {
-            public string Url { get; set; }
+            public string Url { get; set; } = string.Empty;
             public int Force { get; set; }
             public int Speed { get; set; }
             public int Popularity { get; set; }

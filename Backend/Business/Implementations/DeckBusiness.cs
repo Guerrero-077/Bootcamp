@@ -16,12 +16,12 @@ namespace Business.Implementations
             _deckRepository = data;
         }
 
-        public async Task<IEnumerable<DeckDto>> GetDecksAsync()
-        {
-            var decks = await _deckRepository.GetDeckWithUserCard();
+        //public async Task<IEnumerable<DeckDto>> GetDecksAsync()
+        //{
+        //    var decks = await _deckRepository.GetDeckWithUserCard();
 
-            return decks.Adapt<IEnumerable<DeckDto>>();
-        }
+        //    return decks.Adapt<IEnumerable<DeckDto>>();
+        //}
 
         public async Task<IEnumerable<DeckDto>> GetDecksByPlayerAsync(int playerId)
         {

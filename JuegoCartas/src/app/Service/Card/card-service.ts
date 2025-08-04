@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class CardService {
-  private readonly urlBase = environment.apiUrl + 'card';
+  private urlBase = environment.apiUrl + 'card';
 
   constructor(private http: HttpClient) { }
 

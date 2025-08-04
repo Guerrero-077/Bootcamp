@@ -6,10 +6,10 @@ using Web.Controllers.Base;
 
 namespace Web.Controllers
 {
-    public class RoomController : GenericController<Room, RoomDto>
+    public class GameController : GenericController<Game, GameDto>
     {
-        private readonly IRoomService _roomService;
-        public RoomController(IRoomService business) : base(business)
+        private readonly IGameService _roomService;
+        public GameController(IGameService business) : base(business)
         {
             _roomService = business;
         }
@@ -17,12 +17,12 @@ namespace Web.Controllers
         /// <summary>
         /// Inicia una partida en la sala especificada. Reparte cartas a los jugadores.
         /// </summary>
-        [HttpPost("{roomId}/start")]
-        public async Task<ActionResult<GameStartResultDto>> StartGame(int roomId)
+        [HttpPost("{gameId}/start")]
+        public async Task<ActionResult<GameStartResultDto>> StartGame(int gameId)
         {
             try
             {
-                var result = await _roomService.StartGameAsync(roomId);
+                var result = await _roomService.StartGameAsync(gameId);
 
                 if (!result.Success)
                     return BadRequest("No se pudo iniciar la partida.");

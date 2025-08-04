@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { CardModel } from '../../Models/Cards.models';
 import { CardService } from '../../Service/Card/card-service';
@@ -12,8 +12,13 @@ import { CardService } from '../../Service/Card/card-service';
 })
 export class CardComponent {
 
-  @Input() cards: CardModel[] | null = null;
+  @Input() cards?: CardModel[];
   @Input() layout: 'grid' | 'horizontal' = 'grid';
+  @Output() attributeSelected = new EventEmitter<{ card: CardModel; attribute: string }>();
+
+  onAttributeClick(card: CardModel, attribute: string): void {
+    this.attributeSelected.emit({ card, attribute });
+  }
 
 
   // private readonly cardService = inject(CardService);
@@ -26,4 +31,6 @@ export class CardComponent {
   //     });
   //   }
   // }
+
+
 }

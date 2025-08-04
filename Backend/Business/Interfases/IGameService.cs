@@ -3,9 +3,9 @@ using Entity.Models;
 
 namespace Business.Interfases
 {
-    public interface IRoomService : IBaseBusiness<Room, RoomDto>
+    public interface IGameService : IBaseBusiness<Game, GameDto>
     {
         //Task<RoomDto?> GetRoomWithPlayersAsync(int roomId);
-        Task<GameStartResultDto> StartGameAsync(int roomId);
+        Task<GameStartResultDto> StartGameAsync(int gameId);
     }
 }

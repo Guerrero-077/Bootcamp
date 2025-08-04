@@ -2,12 +2,12 @@
     <mat-card class="game-card" *ngFor="let card of cards">
         <img class="game-card-img" mat-card-image [src]="card.url" alt="Card image" />
         <div class="grid">
-            <p class="texto">Fuerza: {{ card.force }}</p>
-            <p class="texto">Velocidad: {{ card.speed }}</p>
-            <h2 class="texto">IQ: {{ card.iq }}</h2>
-            <p class="texto">Popularidad: {{ card.popularity }}</p>
-            <p class="texto">Resistencia: {{ card.resistance }}</p>
-            <p class="texto">Apariciones: {{ card.appearances }}</p>
+            <p class="texto" (click)="onAttributeClick(card, 'force')">Fuerza: {{ card.force }}</p>
+            <p class="texto" (click)="onAttributeClick(card, 'speed')">Velocidad: {{ card.speed }}</p>
+            <h2 class="texto" (click)="onAttributeClick(card, 'iq')">IQ: {{ card.iq }}</h2>
+            <p class="texto" (click)="onAttributeClick(card, 'popularity')">Popularidad: {{ card.popularity }}</p>
+            <p class="texto" (click)="onAttributeClick(card, 'resistance')">Resistencia: {{ card.resistance }}</p>
+            <p class="texto" (click)="onAttributeClick(card, 'appearances')">Apariciones: {{ card.appearances }}</p>
         </div>
     </mat-card>
 </div>

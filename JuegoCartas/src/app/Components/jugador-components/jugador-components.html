@@ -1,33 +1,30 @@
-<div class="player-card">
-    <!-- Puntuación -->
+<div class="player-card" (click)="openCardModal()">
     <div class="score-section">
         <span class="star">⭐</span>
-        <!-- <span class="score">{{ player.score }}</span> -->
+        <span class="score">{{ models?.winner }}</span>
     </div>
 
-    <!-- Info del jugador -->
     <div class="player-info">
         <div class="avatar">
-            <img [src]="'/perfil.png'" [alt]="player.name + ' avatar'" class="avatar-img">
+            <img [src]="'/perfil.png'" [alt]="'avatar'" class="avatar-img">
         </div>
         <div class="name-badge">
-            {{ player.name }}
+            {{ models?.playerName }}
         </div>
     </div>
 
-    <!-- Cartas decorativas (ocultas) -->
     <div class="cards-section">
         <div class="cards-container">
-            <div class="card" *ngFor="let i of getCards(); let index = index"
-                [style.z-index]="getCards().length - index" [style.left.px]="index * 8" (click)="openCardModal()">
-                🂠
+            <div class="card" *ngFor="let i of cardIndexes; let index = index"
+                [style.z-index]="cardIndexes.length - index" [style.left.px]="index * 8">
+                8
             </div>
         </div>
     </div>
 </div>
 
-<!-- Modal con cartas reales -->
 <app-simple-modal-component [visible]="modalVisible" (close)="closeModal()">
-    <h3>Cartas de {{ player.name }}</h3>
-    <app-card-component [cards]="cards" layout="horizontal"></app-card-component>
+    <h3>Cartas de {{ models?.playerName }}</h3>
+    <app-card-component [cards]="cards" layout="horizontal"
+        (attributeSelected)="handleAttributeSelection($event)"></app-card-component>
 </app-simple-modal-component>

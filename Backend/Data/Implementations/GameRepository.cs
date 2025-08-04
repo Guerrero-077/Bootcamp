@@ -1,19 +1,19 @@
 ﻿using Data.Interfases;
 using Data.Repository;
-using Entity.Conetxt;
+using Entity.Context;
 using Entity.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.Implements
 {
-    public class RoomRepository : BaseData<Room>, IRoomRepository
+    public class GameRepository : BaseData<Game>, IGameRepository
     {
-        public RoomRepository(ApplicationDbContext context) : base(context)
+        public GameRepository(ApplicationDbContext context) : base(context)
         {
         }
 
-        public async Task<Room?> GetWithPlayersAsync(int roomId) =>
-            await _context.Set<Room>()
+        public async Task<Game?> GetWithPlayersAsync(int roomId) =>
+            await _context.Set<Game>()
                 .Include(r => r.GamePlayers)
                     .ThenInclude(gp => gp.Player)
                 .FirstOrDefaultAsync(r => r.Id == roomId);
