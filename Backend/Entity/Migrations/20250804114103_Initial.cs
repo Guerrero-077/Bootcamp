@@ -115,7 +115,7 @@ namespace Entity.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     GamePlayerId = table.Column<int>(type: "int", nullable: false),
                     CardId = table.Column<int>(type: "int", nullable: false),
-                    Use = table.Column<bool>(type: "bit", nullable: false)
+                    Used = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -231,6 +231,11 @@ namespace Entity.Migrations
                     { 55, 60, 94, 86, 70, 91, 65, "https://guerrero-077.github.io/imagenes/img/img55.png" },
                     { 56, 63, 45, 69, 76, 58, 70, "https://guerrero-077.github.io/imagenes/img/img56.png" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "Games",
+                columns: new[] { "Id", "CreateAt" },
+                values: new object[] { 1, new DateTime(25, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Decks_CardId",

@@ -3,16 +3,26 @@
 .player-card {
     background: linear-gradient(135deg, #4a4a4a 0%, #6a6a6a 100%);
     border-radius: 20px;
+
     padding: 16px;
-    width: 180px;
+    width: 150px;
+    height: 150px;
+
     border: 3px solid #A8FFFA;
     box-shadow: 10px 4px 15px rgba(0, 0, 0, 0.3);
     font-family: "Keania One", sans-serif;
+
     font-weight: 400;
     font-style: normal;
     color: white;
+
     position: relative;
     overflow: hidden;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .player-card::before {
@@ -30,7 +40,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 }
 
 .star {
@@ -40,7 +50,7 @@
 }
 
 .score {
-    font-size: 32px;
+    font-size: 24px;
     font-weight: bold;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
@@ -53,13 +63,14 @@
 }
 
 .avatar {
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     border: 3px solid #ffffff;
     overflow: hidden;
-    margin-bottom: 8px;
+    margin-bottom: -10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 1;
 }
 
 .avatar-img {
@@ -83,18 +94,23 @@
 .cards-section {
     display: flex;
     justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
 .cards-container {
     position: relative;
     height: 45px;
     width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .card {
     position: absolute;
-    width: 30px;
-    height: 40px;
+    width: 20px;
+    height: 30px;
     background: url('/fondo.png');
     border-radius: 6px;
     border: 2px solid #60a5fa;

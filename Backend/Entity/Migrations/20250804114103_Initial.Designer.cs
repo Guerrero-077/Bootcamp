@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Entity.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250804024438_Initial")]
+    [Migration("20250804114103_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -692,7 +692,7 @@ namespace Entity.Migrations
                     b.Property<int>("GamePlayerId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Use")
+                    b.Property<bool>("Used")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
@@ -718,6 +718,13 @@ namespace Entity.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Games");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreateAt = new DateTime(25, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("Entity.Models.GamePlayer", b =>

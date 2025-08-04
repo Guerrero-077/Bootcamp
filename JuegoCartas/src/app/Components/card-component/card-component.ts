@@ -16,8 +16,16 @@ export class CardComponent {
   @Input() layout: 'grid' | 'horizontal' = 'grid';
   @Output() attributeSelected = new EventEmitter<{ card: CardModel; attribute: string }>();
 
+
+     @Output() cerrarModal = new EventEmitter<void>();
+
+     cerrar() {
+       this.cerrarModal.emit();
+     }
+  
   onAttributeClick(card: CardModel, attribute: string): void {
     this.attributeSelected.emit({ card, attribute });
+    this.cerrar();
   }
 
 
