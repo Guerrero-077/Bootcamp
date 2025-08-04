@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { HttpClient } from '@microsoft/signalr';
 import { Observable } from 'rxjs';
 import { GamePlayerModel } from '../../Models/GamePlayer.models';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +10,9 @@ import { GamePlayerModel } from '../../Models/GamePlayer.models';
 export class GamePlayerService {
   private urlBase = environment.apiUrl + 'GamePlayer'
 
-  constructor(http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
+  getAll(): Observable<GamePlayerModel[]> {
+    return this.http.get<GamePlayerModel[]>(this.urlBase);
+  }
 }

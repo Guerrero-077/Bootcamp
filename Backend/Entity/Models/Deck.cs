@@ -9,7 +9,7 @@ namespace Entity.Models
 
         public int CardId { get; set; }
         public Card? Card { get; set; }
-        public bool Use {  get; set; }
+        public bool Used {  get; set; }
 
         //public bool Active { get; set; }
         //public List<Card>? Card { get; set; }

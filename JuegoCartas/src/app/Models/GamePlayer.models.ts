@@ -1,4 +1,3 @@
-import { Player } from "./Player.models";
 
 export interface GamePlayerModel {
     id: number;

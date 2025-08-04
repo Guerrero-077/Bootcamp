@@ -23,12 +23,12 @@ namespace Web.Controllers
         //    return Ok(result);
         //}
 
-        //[HttpGet("player/{playerId}")]
-        //public async Task<IActionResult> GetDecksByPlayer(int playerId)
-        //{
-        //    var result = await _deckService.GetDecksByPlayerAsync(playerId);
-        //    return Ok(result);
-        //}
+        [HttpGet("player/{playerId}")]
+        public async Task<IActionResult> GetDecksByPlayer(int playerId)
+        {
+            var result = await _deckService.GetDecksByPlayerAsync(playerId);
+            return Ok(result);
+        }
 
         //[HttpGet("room/{roomId}")]
         //public async Task<ActionResult<List<DeckDto>>> GetDecksByRoom(int roomId)

@@ -1,6 +1,7 @@
 ﻿using Data.Interfases;
 using Data.Repository;
 using Entity.Context;
+using Entity.Dtos;
 using Entity.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,15 +22,16 @@ namespace Data.Implements
         //        .ToListAsync();
         //}
 
-        //public async Task<IEnumerable<Deck>> GetDecksByPlayerIdAsync(int playerId)
-        //{
-        //    return await _context.Set<Deck>()
-        //        .Include(d => d.Card)
-        //        .Include(d => d.GamePlayer)
-        //            .ThenInclude(gp => gp.Player)
-        //        .Where(d => d.GamePlayer.PlayerId == playerId)
-        //        .ToListAsync();
-        //}
+        public async Task<IEnumerable<Deck>> GetDecksByPlayerIdAsync(int playerId)
+        {
+            return await _context.Set<Deck>()
+                .Include(d => d.Card)
+                .Include(d => d.GamePlayer)
+                    .ThenInclude(gp => gp.Player)
+                .Where(d => d.GamePlayer.PlayerId == playerId)
+                .ToListAsync();
+        }
+
 
         public async Task AddRangeAsync(IEnumerable<Deck> decks)
         {

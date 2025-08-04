@@ -3,6 +3,6 @@ export interface Player {
     name: string;
     // score: number;
     // avatar?: string;
-    cardCount: number;
+    // cardCount: number;
     // position: number;
 }

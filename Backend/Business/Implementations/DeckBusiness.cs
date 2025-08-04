@@ -3,6 +3,7 @@ using Business.Interfases;
 using Data.Interfases;
 using Entity.Dtos;
 using Entity.Models;
+using Mapster;
 
 namespace Business.Implementations
 {
@@ -22,10 +23,10 @@ namespace Business.Implementations
         //    return decks.Adapt<IEnumerable<DeckDto>>();
         //}
 
-        //public async Task<IEnumerable<DeckDto>> GetDecksByPlayerAsync(int playerId)
-        //{
-        //    var decks = await _deckRepository.GetDecksByPlayerIdAsync(playerId);
-        //    return decks.Adapt<IEnumerable<DeckDto>>();
-        //}
+        public async Task<IEnumerable<DeckDto>> GetDecksByPlayerAsync(int playerId)
+        {
+            var decks = await _deckRepository.GetDecksByPlayerIdAsync(playerId);
+            return decks.Adapt<IEnumerable<DeckDto>>();
+        }
     }
 }
