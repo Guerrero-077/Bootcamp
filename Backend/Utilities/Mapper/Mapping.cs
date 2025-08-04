@@ -1,11 +1,6 @@
 ﻿using Entity.Dtos;
 using Entity.Models;
 using Mapster;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Utilities.Mapper
 {
@@ -17,10 +12,10 @@ namespace Utilities.Mapper
             TypeAdapterConfig<PlayerDto, Player>.NewConfig().TwoWays();
             //TypeAdapterConfig<GamePlayerDto, GamePlayer>.NewConfig().TwoWays();
 
-            TypeAdapterConfig<GamePlayer, GamePlayerWithCardsDto>.NewConfig().TwoWays();
+            //TypeAdapterConfig<GamePlayer, GamePlayerWithCardsDto>.NewConfig().TwoWays();
 
             TypeAdapterConfig<DeckDto, Deck>.NewConfig().TwoWays();
-            TypeAdapterConfig<RoomDto, Room>.NewConfig().TwoWays();
+            TypeAdapterConfig<GameDto, Game>.NewConfig().TwoWays();
 
         }
 

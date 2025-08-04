@@ -1,5 +1,6 @@
 ﻿using Business.Implementations;
 using Business.Interfases;
+using Data.Implementations;
 using Data.Implements;
 using Data.Interfases;
 using Data.Repository;
@@ -21,8 +22,8 @@ namespace Web.Extensions
             services.AddScoped<IBaseBusiness<Player, PlayerDto>, PlayerBusiness>();
 
             //Room 
-            services.AddScoped<IRoomRepository, RoomRepository>();
-            services.AddScoped <IRoomService, RoomBusiness>();
+            services.AddScoped<IGameRepository, GameRepository>();
+            services.AddScoped<IGameService, GameBusiness>();
 
             //Deck
             services.AddScoped<IDeckRepository, DeckRepositoriy>();
@@ -35,6 +36,14 @@ namespace Web.Extensions
             //GamePlayer
             services.AddScoped<IBaseData<GamePlayer>, GamePlayerRepository>();
             services.AddScoped<IBaseBusiness<GamePlayer, GamePlayerDto>, GamePlayerBusiness>();
+
+            //Move 
+            services.AddScoped<IMoveRepository, MoveRepository>();
+            services.AddScoped<IBaseBusiness<Move, MoveDto>, MoveService>();
+
+            //Round
+            services.AddScoped<IRounRepository, RounRepository>();
+            services.AddScoped<IBaseBusiness<Round, RoundDto>, RounService>();
 
             return services;
         }

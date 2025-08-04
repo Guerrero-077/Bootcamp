@@ -1,9 +1,4 @@
 ﻿using Entity.Models.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Entity.Dtos
 {
@@ -13,9 +8,10 @@ namespace Entity.Dtos
         //public string PlayerName { get; set; }
 
         public int PlayerId { get; set; }
-        public PlayerDto? Player { get; set; }
+        public string PlayerName { get; set; }    
+        //public PlayerDto? Player { get; set; }
 
-        public int RoomId { get; set; }
-        public bool Winner { get; set; }
+        public int GameId { get; set; }
+        public int Winner { get; set; }
     }
 }

@@ -9,38 +9,38 @@ import { CardModel } from '../../Models/Cards.models';
 
 @Component({
   selector: 'app-jugador-components',
-  imports: [CommonModule, SimpleModalComponent, MatCardModule, CardComponent],
+  imports: [CommonModule, MatCardModule, SimpleModalComponent],
   templateUrl: './jugador-components.html',
   styleUrl: './jugador-components.css'
 })
 export class JugadorComponents {
 
-  @Input() player!: Player;
+  // @Input() player!: Player;
 
-  private readonly deckService = inject(DeckService);
+  // private readonly deckService = inject(DeckService);
 
-  selectedCard: any = null;
-  modalVisible: boolean = false;
-  cards: CardModel[] = [];
+  // selectedCard: any = null;
+  // modalVisible: boolean = false;
+  // cards: CardModel[] = [];
 
-  openCardModal() {
-    this.deckService.getDecksByPlayer(this.player.id).subscribe({
-      next: (data) => {
-        this.cards = data.map(deck => deck.card); // Mapea a solo las cartas
-        this.modalVisible = true;
-      },
-      error: (err) => {
-        console.error('Error al obtener cartas del jugador', err);
-      }
-    });
-  }
+  // openCardModal() {
+  //   this.deckService.getDecksByPlayer(this.player.id).subscribe({
+  //     next: (data) => {
+  //       this.cards = data.map(deck => deck.card); // Mapea a solo las cartas
+  //       this.modalVisible = true;
+  //     },
+  //     error: (err) => {
+  //       console.error('Error al obtener cartas del jugador', err);
+  //     }
+  //   });
+  // }
 
-  closeModal() {
-    this.modalVisible = false;
-    this.selectedCard = null;
-  }
+  // closeModal() {
+  //   this.modalVisible = false;
+  //   this.selectedCard = null;
+  // }
 
-  getCards(): number[] {
-    return Array(Math.min(this.player.cardCount, 4)).fill(0).map((_, i) => i);
-  }
+  // getCards(): number[] {
+  //   return Array(Math.min(this.player.cardCount, 4)).fill(0).map((_, i) => i);
+  // }
 }

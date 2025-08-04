@@ -5,9 +5,9 @@ using Entity.Models;
 
 namespace Business.Implementations
 {
-    public class GamePlayerBusiness : BaseBusiness<GamePlayer, GamePlayerDto>
+    public class RounService : BaseBusiness<Round, RoundDto>
     {
-        public GamePlayerBusiness(IBaseData<GamePlayer> data) : base(data)
+        public RounService(IRounRepository data) : base(data)
         {
         }
     }

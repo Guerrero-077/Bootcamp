@@ -1,6 +1,6 @@
 ﻿using Data.Interfases;
 using Data.Repository;
-using Entity.Conetxt;
+using Entity.Context;
 using Entity.Models;
 
 namespace Data.Implements

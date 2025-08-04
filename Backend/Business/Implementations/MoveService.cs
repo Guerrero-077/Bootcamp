@@ -5,9 +5,9 @@ using Entity.Models;
 
 namespace Business.Implementations
 {
-    public class GamePlayerBusiness : BaseBusiness<GamePlayer, GamePlayerDto>
+    public class MoveService : BaseBusiness<Move, MoveDto>
     {
-        public GamePlayerBusiness(IBaseData<GamePlayer> data) : base(data)
+        public MoveService(IBaseData<Move> data) : base(data)
         {
         }
     }

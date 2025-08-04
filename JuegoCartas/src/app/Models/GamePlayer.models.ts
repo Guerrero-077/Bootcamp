@@ -1,9 +1,9 @@
 import { Player } from "./Player.models";
 
-export interface GamePlayer {
-    id:       number;
+export interface GamePlayerModel {
+    id: number;
     playerId: number;
-    player:   Player;
-    roomId:   number;
-    winner:   boolean;
+    playerName: string;
+    gameId: number;
+    winner: number;
 }

@@ -16,19 +16,19 @@ namespace Web.Controllers
             _deckService = business;
         }
 
-        [HttpGet("GetAllWhitCardPlayer")]
-        public async Task<IActionResult> GetDecksWithCardAndPlayerAsync()
-        {
-            var result = await _deckService.GetDecksAsync();
-            return Ok(result);
-        }
+        //[HttpGet("GetAllWhitCardPlayer")]
+        //public async Task<IActionResult> GetDecksWithCardAndPlayerAsync()
+        //{
+        //    var result = await _deckService.GetDecksAsync();
+        //    return Ok(result);
+        //}
 
-        [HttpGet("player/{playerId}")]
-        public async Task<IActionResult> GetDecksByPlayer(int playerId)
-        {
-            var result = await _deckService.GetDecksByPlayerAsync(playerId);
-            return Ok(result);
-        }
+        //[HttpGet("player/{playerId}")]
+        //public async Task<IActionResult> GetDecksByPlayer(int playerId)
+        //{
+        //    var result = await _deckService.GetDecksByPlayerAsync(playerId);
+        //    return Ok(result);
+        //}
 
         //[HttpGet("room/{roomId}")]
         //public async Task<ActionResult<List<DeckDto>>> GetDecksByRoom(int roomId)

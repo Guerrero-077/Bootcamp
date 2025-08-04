@@ -1,20 +1,19 @@
 ﻿using Entity.Models.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Entity.Models
 {
     public class GamePlayer : BaseModel
     {
-        public int PlayerId { get; set; }
-        public int RoomId { get; set; }
-        public bool Winner { get; set; }
-
+        public int GameId { get; set; }
+        public Game? Game { get; set; }
+        public int PlayerId { get; set; } 
         public Player? Player { get; set; }
-        public Room? Room { get; set; }
-        public List<Deck>? Decks { get; set; }
+
+        public int Score { get; set; }
+
+        public List<Deck> Decks { get; set; } = new List<Deck>();
+        public List<Move> Moves { get; set; } = new List<Move>();
     }
+
+
 }

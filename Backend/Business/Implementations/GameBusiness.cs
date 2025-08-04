@@ -1,27 +1,20 @@
 ﻿using Business.Implementations.Base;
 using Business.Interfases;
-using Data.Implements;
 using Data.Interfases;
 using Entity.Dtos;
 using Entity.Models;
 using Mapster;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Implementations
 {
-    public class RoomBusiness : BaseBusiness<Room, RoomDto>, IRoomService
+    public class GameBusiness : BaseBusiness<Game, GameDto>, IGameService
     {
-        private readonly IRoomRepository _roomRepository;
+        private readonly IGameRepository _gameRepository;
         private readonly ICardRepository _cardRepository;
         private readonly IDeckRepository _deckRepository;
-        public RoomBusiness(IRoomRepository data, ICardRepository cardRepository, IDeckRepository deckRepository) : base(data)
+        public GameBusiness(IGameRepository data, ICardRepository cardRepository, IDeckRepository deckRepository) : base(data)
         {
-            _roomRepository = data;
+            _gameRepository = data;
             _cardRepository = cardRepository;
             _deckRepository = deckRepository;
         }
@@ -31,27 +24,27 @@ namespace Business.Implementations
 
 
 
-        public async Task<GameStartResultDto> StartGameAsync(int roomId)
+        public async Task<GameStartResultDto> StartGameAsync(int gameId)
         {
-            var room = await _roomRepository.GetWithPlayersAsync(roomId);
+            var game = await _gameRepository.GetWithPlayersAsync(gameId);
 
-            ValidateRoom(room);
+            Validategame(game);
 
             var allCards = await _cardRepository.GetAll();
             var shuffled = allCards.OrderBy(_ => Guid.NewGuid()).ToList();
 
-            ValidateCardAvailability(room.GamePlayers.Count, shuffled.Count);
+            ValidateCardAvailability(game.GamePlayers.Count, shuffled.Count);
 
-            foreach (var player in room.GamePlayers)
+            foreach (var player in game.GamePlayers)
             {
                 var playerCards = GetPlayerDeck(shuffled, player.Id);
                 await _deckRepository.AddRangeAsync(playerCards);
             }
 
-            await _roomRepository.Update(room); 
+            await _gameRepository.Update(game);
 
 
-            var fullDecks = await _deckRepository.GetDecksByRoomWithCardAndPlayer(roomId);
+            var fullDecks = await _deckRepository.GetDecksBygameWithCardAndPlayer(gameId);
 
             // Agrupar por GamePlayer y mapear
             var grouped = fullDecks
@@ -63,7 +56,6 @@ namespace Business.Implementations
                     {
                         GamePlayerId = first.GamePlayerId,
                         PlayerName = first.GamePlayer!.Player!.Name,
-                        Player = first.GamePlayer.Player.Adapt<PlayerDto>(),
                         Cards = group.Select(d => d.Card!.Adapt<CardDto>()).ToList()
                     };
                 }).ToList();
@@ -71,7 +63,7 @@ namespace Business.Implementations
             return new GameStartResultDto
             {
                 Success = true,
-                RoomId = room.Id,
+                GameId = gameId,
                 Players = grouped
             };
         }
@@ -81,12 +73,12 @@ namespace Business.Implementations
 
 
 
-        private void ValidateRoom(Room room)
+        private void Validategame(Game game)
         {
-            if (room == null)
+            if (game == null)
                 throw new Exception("La sala no existe.");
 
-            int count = room.GamePlayers.Count;
+            int count = game.GamePlayers.Count;
             if (count < 2 || count > 7)
                 throw new Exception("Número inválido de jugadores");
         }
@@ -108,8 +100,7 @@ namespace Business.Implementations
                 deck.Add(new Deck
                 {
                     GamePlayerId = gamePlayerId,
-                    CardId = card.Id,
-                    Active = true
+                    CardId = card.Id
                 });
             }
 

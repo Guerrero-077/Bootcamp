@@ -4,7 +4,7 @@ namespace Entity.Models
 {
     public class Card : BaseModel
     {
-        public string Url { get; set; }
+        public string Url { get; set; } = string.Empty;
         public int Force { get; set; }
         public int Speed { get; set; }
         public int Popularity { get; set; }
@@ -12,9 +12,8 @@ namespace Entity.Models
         public int Resistance { get; set; }
         public int IQ { get; set; }
 
-        //public int? DeckId { get; set; }
-
         public List<Deck>? Decks { get; set; }
-
+        public List<Move>? Moves { get; set; }
     }
+
 }
