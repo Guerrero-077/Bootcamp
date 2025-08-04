@@ -1,0 +1,175 @@
+.modal-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000000b3;
+  /* fondo oscuro */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  overflow: hidden !important;
+}
+
+.modal-content {
+  background-color: rgba(104, 123, 246, 0.5);
+  border: 2px solid rgba(139, 255, 247, 0.4);
+  border-radius: 15px;
+  padding: 30px;
+  text-align: center;
+  width: 300px;
+  position: relative;
+  box-shadow: 0 0 25px rgba(168, 255, 250, 0.65);
+
+  color: rgb(0, 0, 0);
+  font-family: 'Orbitron', sans-serif;
+  max-height: 90vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border-radius: 12px;
+  width: 300px;
+  overflow: hidden;
+}
+
+h2 {
+  font-size: 28px;
+  text-shadow: 0 0 3px #ffffff;
+  margin-bottom: 20px;
+}
+
+.input {
+  width: 100%;
+  padding: 12px;
+  font-weight: bold;
+  border-radius: 5px;
+  border: none;
+  background-color: #c2f9ff;
+  color: black;
+  margin-bottom: 20px;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.enter-btn {
+  background-color: #000;
+  color: white;
+  border: 2px solid #00ffff;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: 'Orbitron', sans-serif;
+  box-shadow: 0 0 10px #00ffff;
+}
+
+.light-beam {
+  position: absolute;
+  bottom: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 60px solid transparent;
+  border-right: 60px solid transparent;
+  border-top: 100px solid rgba(0, 183, 255, 0.4);
+  filter: blur(4px);
+}
+
+
+:host ::ng-deep .mat-dialog-container {
+  overflow: hidden !important;
+  padding: 0 !important;
+  border-radius: 10px;
+  background: transparent;
+  box-shadow: none;
+}
+
+
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+/* Fondo translúcido azul con borde brillante */
+.modal-container {
+  background: radial-gradient(circle at top, rgba(0, 255, 255, 0.2), rgba(0, 0, 50, 0.9));
+  border: 3px solid #00f0ff;
+  border-radius: 15px;
+  box-shadow: 0 0 20px #00f0ff, 0 0 60px rgba(0, 255, 255, 0.5);
+  padding: 30px;
+  text-align: center;
+  color: white;
+  position: relative;
+}
+
+/* Texto estilizado */
+.modal-container h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #00ffff;
+  text-shadow: 0 0 5px #00ffff;
+}
+
+/* Input */
+.modal-container input {
+  background: rgba(0, 0, 0, 0.7);
+  border: 2px solid #00f0ff;
+  border-radius: 8px;
+  padding: 10px;
+  color: #00f0ff;
+  width: 80%;
+  margin-bottom: 20px;
+  font-family: 'Orbitron', sans-serif;
+}
+
+/* Botón */
+.modal-container button {
+  background: rgba(104, 123, 246, 0.5);
+  border: 2px solid #00f0ff;
+  border-radius: 5px;
+  color: #00f0ff;
+  padding: 10px 20px;
+  font-weight: bold;
+  font-family: 'Orbitron', sans-serif;
+  box-shadow: 0 0 10px #00f0ff;
+  cursor: pointer;
+}
+
+.modal-container button:hover {
+  background: #00f0ff;
+}
+
+.enter-btn {
+  background: rgba(104, 123, 246, 0.5);
+}
+
+/* Proyector debajo */
+.hologram-base {
+  width: 100px;
+  height: 30px;
+  background: #111;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 0;
+}
+
+.hologram-light {
+  position: absolute;
+  bottom: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 100px solid transparent;
+  border-right: 100px solid transparent;
+  border-top: 100px solid rgba(0, 0, 255, 0.3);
+  z-index: -1;
+}

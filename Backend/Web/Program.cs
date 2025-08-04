@@ -1,7 +1,15 @@
-using Entity.Context;
+
+using Business.Implementations;
+using Business.Interfases;
+using Data.Implements;
+using Data.Interfases;
+using Entity.Conetxt;
+using Entity.Dtos;
+using Entity.Models;
 using Microsoft.EntityFrameworkCore;
 using Utilities.Mapper;
 using Web.Extensions;
+using Web.Hubs;
 
 namespace Web
 {
@@ -23,7 +31,7 @@ namespace Web
 
 
             // Connection
-            var connection = configuration.GetConnectionString("DefaultConnection");
+            var connection = configuration.GetConnectionString("DefaultConnection2");
 
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connection)
@@ -56,7 +64,7 @@ namespace Web
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseCors();
 
 
@@ -66,7 +74,7 @@ namespace Web
 
 
             app.MapControllers();
-            app.MapHub<Hubs.Game>("/gamehub");
+            app.MapHub<Game>("/gamehub");
 
 
             app.Run();
