@@ -1,0 +1,13 @@
+<div class="modal-wrapper">
+  <div class="modal-content">
+    <h2>Ingrese Jugador</h2>
+
+    <input [(ngModel)]="playerName" placeholder="Nombre" class="input" />
+
+    <button class="enter-btn" (click)="onSubmit()">Ingresar</button>
+    <button  (click)="onClose()">Cancelar</button>
+
+  </div>
+  <div class="hologram-base"></div>
+  <div class="hologram-light"></div>
+</div>
