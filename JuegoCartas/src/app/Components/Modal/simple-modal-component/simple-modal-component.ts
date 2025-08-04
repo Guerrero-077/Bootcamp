@@ -7,11 +7,11 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrl: './simple-modal-component.css'
 })
 export class SimpleModalComponent {
-  @Input() visible: boolean = false;
-  @Output() close = new EventEmitter<void>();
+  // @Input() visible: boolean = false;
+  // @Output() close = new EventEmitter<void>();
 
   
-  onClose() {
-    this.close.emit();
-  }
+  // onClose() {
+  //   this.close.emit();
+  // }
 }

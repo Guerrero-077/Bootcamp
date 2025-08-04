@@ -28,7 +28,7 @@ export class CardComponent {
       this.CardModelo = data;
       this.cardSelected.emit(this.CardModelo);
       this.click.emit();
-      console.log(this.CardModelo);
+      console.log("Evento emitodo" + this.CardModelo);
     });
 
   }
