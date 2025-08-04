@@ -31,7 +31,7 @@ namespace Web
 
 
             // Connection
-            var connection = configuration.GetConnectionString("DefaultConnection");
+            var connection = configuration.GetConnectionString("DefaultConnection2");
 
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connection)
