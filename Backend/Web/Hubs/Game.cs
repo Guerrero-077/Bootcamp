@@ -2,7 +2,7 @@
 
 namespace Web.Hubs
 {
-    public class Game : Hub
+    public class GameJoin : Hub
     {
         public Task Joined(string playerName)
         {

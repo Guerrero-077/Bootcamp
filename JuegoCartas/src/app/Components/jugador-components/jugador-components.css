@@ -111,7 +111,7 @@
     position: absolute;
     width: 20px;
     height: 30px;
-    background: url('/fondo.png');
+    background-image: url('/assets/fondo.png');
     border-radius: 6px;
     border: 2px solid #60a5fa;
     display: flex;

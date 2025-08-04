@@ -21,7 +21,6 @@
     padding: 20px;
     box-sizing: border-box;
 }
-
 .player-slot {
     display: flex;
     flex-direction: column;

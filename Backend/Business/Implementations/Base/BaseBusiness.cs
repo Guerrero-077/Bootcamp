@@ -41,7 +41,7 @@ namespace Business.Implementations.Base
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al cargar todos los registros");
+                throw new Exception("Error al cargar todos los registros",ex);
             }
         }
 

@@ -1,0 +1,36 @@
+/* You can add global styles to this file, and also import other style files */
+/* body {
+  background-image: url('/assets/Sala-Multijugador.png');
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+  font-family: 'Comic Sans MS', cursive;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  overflow: hidden;
+} */
+
+.hola{
+ background-image: url('/assets/Sala-Multijugador.png');
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+  font-family: 'Comic Sans MS', cursive;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  overflow: hidden;
+}
+.transparent-backdrop {
+  background-color: transparent !important;
+  backdrop-filter: none !important;
+}
+
+.no-backdrop-dialog .mat-dialog-container {
+  background: none !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+}

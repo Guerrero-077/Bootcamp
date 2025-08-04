@@ -1,10 +1,4 @@
-
-using Business.Implementations;
-using Business.Interfases;
-using Data.Implements;
-using Data.Interfases;
-using Entity.Conetxt;
-using Entity.Dtos;
+using Entity.Context;
 using Entity.Models;
 using Microsoft.EntityFrameworkCore;
 using Utilities.Mapper;
@@ -31,7 +25,7 @@ namespace Web
 
 
             // Connection
-            var connection = configuration.GetConnectionString("DefaultConnection2");
+            var connection = configuration.GetConnectionString("DefaultConnection");
 
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connection)
@@ -74,7 +68,7 @@ namespace Web
 
 
             app.MapControllers();
-            app.MapHub<Game>("/gamehub");
+            app.MapHub<GameJoin>("/gamehub");
 
 
             app.Run();

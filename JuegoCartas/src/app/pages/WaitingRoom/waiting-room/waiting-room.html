@@ -1,0 +1,25 @@
+<div class="background">
+  <h1 class="title">Sala de Espera</h1>
+
+  <div class="grid-container">
+    <div class="card add-card" (click)="openAddPlayerModal()">
+      <mat-icon>add</mat-icon>
+    </div>
+
+    <div class="card user-card" *ngFor="let user of users">
+      <!-- <img [src]="user.avatar" alt="Avatar" /> -->
+      <p>{{ user.name }}</p>
+      <div class="icons">
+        <!-- <button matIconButton >
+          <mat-icon>edit</mat-icon>
+        </button> -->
+         <button matIconButton (click)="delete(user.id)">
+          <mat-icon>remove</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <button (click)="startGame()">Inciar Sala</button>
+</div>
