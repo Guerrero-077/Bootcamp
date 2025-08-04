@@ -30,6 +30,17 @@ export class JugadorComponents {
   cards: CardModel[] = [];
 
 
+    arregloCartas:[] = [];
+
+    cardSelect: CardModel[] = [];
+
+    
+  Card(event: CardModel){
+    this.cardSelect.push(event); 
+    console.log(this.cardSelect);
+  }
+
+
 
   openCardModal() {
     if (this.models?.playerId !== undefined) {
@@ -67,12 +78,25 @@ export class JugadorComponents {
   }
 
 
-  handleAttributeSelection(event: { card: CardModel; attribute: string }) {
-    const { card, attribute } = event;
-    console.log(`Seleccionaste la carta con ID ${card.id} y el atributo ${attribute}`);
-    this.selectedCard = card;
-    // Lógica adicional: quizás cerrar el modal, enviar a backend, comparar, etc.
-  }
+  // handleAttributeSelection(event: { card: CardModel }) {
+  //   const { card } = event;
+  //   console.log(`Seleccionaste la carta con ID ${card.id}`);
+  //   this.selectedCard = card;
+  //   this.cardService.getById(card.id).subscribe({
+  //     next: (data) => {
+  //       this.selectedCard = data;
+  //       console.log(data)
+  //     },
+  //     error: (err) => console.error('Error al obtener la carta', err),
+  //   });
+  //   // Lógica adicional: quizás cerrar el modal, enviar a backend, comparar, etc.
+  // }
+  // handleAttributeSelection(event: { card: CardModel; attribute: string }) {
+  //   const { card, attribute } = event;
+  //   console.log(`Seleccionaste la carta con ID ${card.id} y el atributo ${attribute}`);
+  //   this.selectedCard = card;
+  //   // Lógica adicional: quizás cerrar el modal, enviar a backend, comparar, etc.
+  // }
 
 
   // getCards(): number[] {

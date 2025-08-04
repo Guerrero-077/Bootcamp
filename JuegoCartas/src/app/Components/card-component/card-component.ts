@@ -12,33 +12,55 @@ import { CardService } from '../../Service/Card/card-service';
 })
 export class CardComponent {
 
+  cardService = inject(CardService);
+
   @Input() cards?: CardModel[];
   @Input() layout: 'grid' | 'horizontal' = 'grid';
-  @Output() attributeSelected = new EventEmitter<{ card: CardModel; attribute: string }>();
+
+  @Output() cardSelected = new EventEmitter<CardModel>();
+  CardModelo! : CardModel;
+
+  @Output() click = new EventEmitter<void>();
 
 
-     @Output() cerrarModal = new EventEmitter<void>();
+  public getById(id: number) {
+    return this.cardService.getById(id).subscribe((data)=>{
+      this.CardModelo = data;
+      this.cardSelected.emit(this.CardModelo);
+      this.click.emit();
+      console.log(this.CardModelo);
+    });
 
-     cerrar() {
-       this.cerrarModal.emit();
-     }
-  
-  onAttributeClick(card: CardModel, attribute: string): void {
-    this.attributeSelected.emit({ card, attribute });
-    this.cerrar();
   }
+  
+    ngOnInit(): void {
+      if (!this.cards) {
+        this.cardService.getAll().subscribe({
+          next: (data) => (this.cards = data),
+          error: (err) => console.error('Error al cargar cartas', err),
+        });
+      }
+    }
+  }
+
+
+  // @Output() attributeSelected = new EventEmitter<{ card: CardModel; attribute: string }>();
+  // @Output() attributeSelected = new EventEmitter<{ card: CardModel }>();
+
+
+    //  @Output() cerrarModal = new EventEmitter<void>();
+
+    //  cerrar() {
+    //    this.cerrarModal.emit();
+    //  }
+  
+  // onAttributeClick(card: CardModel): void {
+  //   this.attributeSelected.emit({ card, attribute });
+  //   this.attributeSelected.emit({ card});
+  //   console.log('Card clicked:', card);
+  //    this.cerrar();
+  // }
 
 
   // private readonly cardService = inject(CardService);
 
-  // ngOnInit(): void {
-  //   if (!this.cards) {
-  //     this.cardService.getAll().subscribe({
-  //       next: (data) => (this.cards = data),
-  //       error: (err) => console.error('Error al cargar cartas', err),
-  //     });
-  //   }
-  // }
-
-
-}

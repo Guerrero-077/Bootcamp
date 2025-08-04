@@ -25,6 +25,6 @@
 
 <app-simple-modal-component [visible]="modalVisible" (close)="closeModal()">
     <h3>Cartas de {{ models?.playerName }}</h3>
-    <app-card-component [cards]="cards" layout="horizontal"
-        (attributeSelected)="handleAttributeSelection($event)"></app-card-component>
+    <app-card-component [cards]="cards" layout="horizontal" (cardSelected)="Card($event)" (click)="closeModal()"></app-card-component>
+        <!-- (attributeSelected)="handleAttributeSelection($event)"></app-card-component> -->
 </app-simple-modal-component>

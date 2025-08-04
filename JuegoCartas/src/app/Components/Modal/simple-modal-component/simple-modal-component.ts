@@ -10,6 +10,7 @@ export class SimpleModalComponent {
   @Input() visible: boolean = false;
   @Output() close = new EventEmitter<void>();
 
+  
   onClose() {
     this.close.emit();
   }

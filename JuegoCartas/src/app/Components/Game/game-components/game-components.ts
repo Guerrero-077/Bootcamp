@@ -1,8 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { GamePlayerModel } from '../../../Models/GamePlayer.models';
-import { GamePlayerService } from '../../../Service/GamePlayer/game-player-service';
+import { Component, inject, OnInit } from "@angular/core";
 import { JugadorComponents } from "../../jugador-components/jugador-components";
-import { CommonModule } from '@angular/common';
+import { CommonModule } from "@angular/common";
+import { CardComponent } from "../../card-component/card-component";
+import { GamePlayerService } from "../../../Service/GamePlayer/game-player-service";
+import { GamePlayerModel } from "../../../Models/GamePlayer.models";
 
 @Component({
   selector: 'app-game-components',
@@ -10,14 +11,19 @@ import { CommonModule } from '@angular/common';
   templateUrl: './game-components.html',
   styleUrl: './game-components.css'
 })
-export class GameComponents implements OnInit {
-  private readonly gamePlayer = inject(GamePlayerService);
+export class GameComponents implements OnInit{
+  gamePlayer = inject(GamePlayerService);
+
+  
+
+
   gamePlayers: GamePlayerModel[] = [];
+
 
 
   ngOnInit() {
     this.Load();
-
+    
   }
 
 
@@ -29,3 +35,4 @@ export class GameComponents implements OnInit {
   }
 
 }
+
