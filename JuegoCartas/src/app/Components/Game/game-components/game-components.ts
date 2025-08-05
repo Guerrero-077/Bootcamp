@@ -14,41 +14,73 @@ import { DeckService } from "../../../Service/Deck/deck-service";
   templateUrl: './game-components.html',
   styleUrl: './game-components.css'
 })
-export class GameComponents implements OnInit{
+export class GameComponents implements OnInit {
+
+  //Servicios
   gamePlayer = inject(GamePlayerService);
-  // Recibimos un arreglo de cartas seleccionadas desde jugador-components.ts
-  cardSelect: CardModel[] = []; 
-  // cardSelect: any[] = [];
-  // Arreglo de jugadores
-  Cards(){
-    return this.cardSelect;
-  }
-  
+  deckService = inject(DeckService);
+  cardService = inject(CardService);
+
+  //Modelos
+  cards: CardModel[] = [];
   gamePlayers: GamePlayerModel[] = [];
-
-
-
   @Input() models?: GamePlayerModel;
+
+
+  //Variables
   readonly cardIndexes = Array.from({ length: 4 }, (_, i) => i);
-
-
-  private readonly deckService = inject(DeckService);
-  private readonly cardService = inject(CardService);
-
   selectedCard: any = null;
   modalVisible: boolean = false;
-  cards: CardModel[] = [];
+  selectedCardsByPlayer = new Map<number, CardModel[]>();
 
 
-    
-  // 
-  Card(event: CardModel){
-    this.cardSelect.push(event); 
-    console.log(this.cardSelect);
+
+  ngOnInit(): void {
+    this.Load();
+
+
+    if (!this.cards) {
+      this.cardService.getAll().subscribe({
+        next: (data) => (this.cards = data),
+        error: (err) => console.error('Error al cargar cartas', err),
+      });
+    }
+  }
+
+  Load() {
+    this.gamePlayer.getAll().subscribe({
+      next: (data) => { this.gamePlayers = data },
+      error: (err) => { console.log('Error :>> ', err); }
+    })
+  }
+
+  //Capturar el evento emitido
+  Card(event: CardModel) {
+    this.cards.push(event);
+    console.log(this.cards);
+  }
+
+  onCardSelected(event: { playerId: number, card: CardModel }) {
+    const { playerId, card } = event;
+
+    if (!this.selectedCardsByPlayer.has(playerId)) {
+      this.selectedCardsByPlayer.set(playerId, []);
+    }
+
+    const playerCards = this.selectedCardsByPlayer.get(playerId)!;
+
+    // Evita duplicados (opcional)
+    const isAlreadySelected = playerCards.some(c => c.id === card.id);
+    if (!isAlreadySelected) {
+      playerCards.push(card);
+    }
+
+    console.log(`Jugador ${playerId} seleccionó`, card);
   }
 
 
 
+  //Método para abrir modal
   openCardModal() {
     if (this.models?.playerId !== undefined) {
       this.deckService.getDecksByPlayer(this.models.playerId).subscribe({
@@ -68,7 +100,7 @@ export class GameComponents implements OnInit{
   }
 
 
-
+  //Método para cerrar modal
   closeModal() {
     this.modalVisible = false;
     this.selectedCard = null;
@@ -76,23 +108,7 @@ export class GameComponents implements OnInit{
 
 
 
-  ngOnInit(): void {
-    this.Load();
-    if (!this.cards) {
-      this.cardService.getAll().subscribe({
-        next: (data) => (this.cards = data),
-        error: (err) => console.error('Error al cargar cartas', err),
-      });
-    }
-  }
 
-
-  Load() {
-    this.gamePlayer.getAll().subscribe({
-      next: (data) => { this.gamePlayers = data },
-      error: (err) => { console.log('Error :>> ', err); }
-    })
-  }
 
 }
 

@@ -3,23 +3,22 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-import { GeneralService } from '../../../Service/general/general-service';
-import { AddPlayerModal } from '../../../Components/add-player-modal/add-player-modal';
 import Swal from 'sweetalert2';
+import { AddPlayerModal } from '../../../Components/add-player-modal/add-player-modal';
 import { GameService } from '../../../Service/Game/game-service';
-import { insertImport } from '@angular/cdk/schematics';
+import { GeneralService } from '../../../Service/general/general-service';
 
 
 interface User {
   id: number;
   name: string;
-  avatar: string; // Opcional para iconos personalizados
+  avatar: string;
 }
 
 @Component({
   selector: 'app-waiting-room',
   imports: [
-        CommonModule,
+    CommonModule,
     MatButtonModule, MatIconModule
   ],
   templateUrl: './waiting-room.html',
@@ -73,22 +72,22 @@ export class WaitingRoom implements OnInit {
   }
 
   delete(id: number) {
-  Swal.fire({
-    title: '¿Estás seguro?',
-    text: 'Esta acción eliminará el jugador.',
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonText: 'Sí, eliminar',
-    cancelButtonText: 'Cancelar',
-  }).then((result) => {
-    if (result.isConfirmed) {
-      this.apiService.delete('Player', id).subscribe(() => {
-        this.cargarUsers();
-        Swal.fire('Eliminado', 'El jugador ha sido eliminado.', 'success');
-      });
-    }
-  });
-}
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Esta acción eliminará el jugador.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.apiService.delete('Player', id).subscribe(() => {
+          this.cargarUsers();
+          Swal.fire('Eliminado', 'El jugador ha sido eliminado.', 'success');
+        });
+      }
+    });
+  }
 
   startGame() {
     this.game.CreateGame().subscribe((data) => {
@@ -99,8 +98,6 @@ export class WaitingRoom implements OnInit {
           icon: 'success',
           confirmButtonText: 'Aceptar'
         }).then(() => {
-          // Aquí puedes redirigir a la página del juego o realizar otra acción
-          // window.location.href = `/game/${data.gameId}`;
           window.location.href = `/game`;
         });
       } else {

@@ -1,7 +1,29 @@
 <div class="flex" style="width: 100%; height: auto;">
-    <app-jugador-components *ngFor="let item of gamePlayers" [models]="item" />
+    <app-jugador-components *ngFor="let item of gamePlayers" [models]="item" (cardSelected)="onCardSelected($event)">
+    </app-jugador-components>
+
 </div>
 
-<div class="hola"> 
-    
+
+<div class="hola-container">
+    <div class="hola" *ngFor="let player of gamePlayers">
+        <!-- <div class="d">
+
+            <h3>Cartas seleccionadas de {{ player.playerName }}</h3>
+        </div> -->
+
+        <div class="selected-cards-container">
+            <div class="selected-card" *ngFor="let card of selectedCardsByPlayer.get(player.playerId) || []">
+                <img class="game-card-img" [src]="card.url" alt="Imagen de carta" />
+                <div class="grid">
+                    <p class="texto">Fuerza: {{ card.force }}</p>
+                    <p class="texto">Velocidad: {{ card.speed }}</p>
+                    <p class="texto">IQ: {{ card.iq }}</p>
+                    <p class="texto">Popularidad: {{ card.popularity }}</p>
+                    <p class="texto">Resistencia: {{ card.resistance }}</p>
+                    <p class="texto">Apariciones: {{ card.appearances }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

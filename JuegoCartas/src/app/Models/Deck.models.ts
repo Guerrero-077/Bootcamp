@@ -8,15 +8,5 @@ export interface DeckModel {
     active: boolean;
     card: CardModel;
     gamePlayer: GamePlayerModel;
-    // cardId: number;
-    // url: string;
 }
 
-// export interface DeckModel {
-//     id: number;
-//     gamePlayerId: number;
-//     playerName: string;
-//     cardId: number;
-//     url: string;
-//     used: boolean;
-// }

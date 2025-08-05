@@ -12,55 +12,42 @@ import { CardService } from '../../Service/Card/card-service';
 })
 export class CardComponent {
 
+  //Servicios
   cardService = inject(CardService);
 
+  //Modelos
   @Input() cards?: CardModel[];
-  @Input() layout: 'grid' | 'horizontal' = 'grid';
 
-  @Output() cardSelected = new EventEmitter<CardModel>();
-  CardModelo! : CardModel;
+  //Variables
+  @Input() layout: 'grid' | 'horizontal' = 'grid';
+  CardModelo!: CardModel;
 
   @Output() click = new EventEmitter<void>();
+  @Output() cardSelected = new EventEmitter<CardModel>();
 
 
-  public getById(id: number) {
-    return this.cardService.getById(id).subscribe((data)=>{
-      this.CardModelo = data;
-      this.cardSelected.emit(this.CardModelo);
-      this.click.emit();
-      console.log("Evento emitodo" + this.CardModelo);
-    });
 
-  }
-  
-    ngOnInit(): void {
-      if (!this.cards) {
-        this.cardService.getAll().subscribe({
-          next: (data) => (this.cards = data),
-          error: (err) => console.error('Error al cargar cartas', err),
-        });
-      }
+  ngOnInit(): void {
+    if (!this.cards) {
+      this.cardService.getAll().subscribe({
+        next: (data) => (this.cards = data),
+        error: (err) => console.error('Error al cargar cartas', err),
+      });
     }
   }
 
+  public getById(id: number) {
+    return this.cardService.getById(id).subscribe((data) => {
+      this.CardModelo = data;
+      this.cardSelected.emit(this.CardModelo);
+      this.click.emit();
+      console.log("Evento emitodo", this.CardModelo);
+    });
 
-  // @Output() attributeSelected = new EventEmitter<{ card: CardModel; attribute: string }>();
-  // @Output() attributeSelected = new EventEmitter<{ card: CardModel }>();
+  }
 
-
-    //  @Output() cerrarModal = new EventEmitter<void>();
-
-    //  cerrar() {
-    //    this.cerrarModal.emit();
-    //  }
-  
-  // onAttributeClick(card: CardModel): void {
-  //   this.attributeSelected.emit({ card, attribute });
-  //   this.attributeSelected.emit({ card});
-  //   console.log('Card clicked:', card);
-  //    this.cerrar();
-  // }
-
-
-  // private readonly cardService = inject(CardService);
-
+  onCardClick(card: CardModel): void {
+    this.cardSelected.emit(card);
+    console.log("Carta emitida:", card);
+  }
+}
