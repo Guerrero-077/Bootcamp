@@ -49,7 +49,10 @@ namespace Data.Implements
                 .ToListAsync();
         }
 
-
+        public async Task<int> DeleteAllDecks()
+        {
+            return await _context.Set<Deck>().ExecuteDeleteAsync();
+        }
 
     }
 }

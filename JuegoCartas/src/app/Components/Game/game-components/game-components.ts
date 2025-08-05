@@ -17,13 +17,13 @@ import { DeckService } from "../../../Service/Deck/deck-service";
 export class GameComponents implements OnInit{
   gamePlayer = inject(GamePlayerService);
   // Recibimos un arreglo de cartas seleccionadas desde jugador-components.ts
-  cardSelect: CardModel[] = []; 
+  cardSelect: CardModel[] = [];
   // cardSelect: any[] = [];
   // Arreglo de jugadores
   Cards(){
     return this.cardSelect;
   }
-  
+
   gamePlayers: GamePlayerModel[] = [];
 
 
@@ -40,10 +40,10 @@ export class GameComponents implements OnInit{
   cards: CardModel[] = [];
 
 
-    
-  // 
+
+  //
   Card(event: CardModel){
-    this.cardSelect.push(event); 
+    this.cardSelect.push(event);
     console.log(this.cardSelect);
   }
 
@@ -94,5 +94,7 @@ export class GameComponents implements OnInit{
     })
   }
 
+
+  FinalizarRonda(){}
 }
 

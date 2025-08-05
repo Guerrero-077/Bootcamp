@@ -49,5 +49,13 @@ namespace Web.Controllers
         //        return StatusCode(500, $"Error al obtener decks: {ex.Message}");
         //    }
         //}
+
+        [HttpDelete("DeleteAll")]
+        public async Task<IActionResult> DeleteAll()
+        {
+            var result = await _deckService.DeleteAllDecks();
+            return Ok(result);
+        }
+
     }
 }

@@ -1,5 +1,6 @@
+import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { CardModel } from '../../Models/Cards.models';
 import { DeckService } from '../../Service/Deck/deck-service';
@@ -7,10 +8,13 @@ import { SimpleModalComponent } from '../Modal/simple-modal-component/simple-mod
 import { GamePlayerModel } from '../../Models/GamePlayer.models';
 import { CardComponent } from "../card-component/card-component";
 import { CardService } from '../../Service/Card/card-service';
+import { Ronda } from '../../Models/round.models';
 
 @Component({
   selector: 'app-jugador-components',
-  imports: [CommonModule, MatCardModule, SimpleModalComponent, CardComponent],
+  imports: [CommonModule,
+    MatButtonModule,
+    MatCardModule, SimpleModalComponent, CardComponent],
   templateUrl: './jugador-components.html',
   styleUrl: './jugador-components.css'
 })
@@ -20,7 +24,8 @@ export class JugadorComponents {
 
   @Input() models?: GamePlayerModel;
   readonly cardIndexes = Array.from({ length: 4 }, (_, i) => i);
-
+  @Input() atributo!: any;
+  @Output() emitirRonda: EventEmitter<any> = new EventEmitter();
 
   private readonly deckService = inject(DeckService);
   private readonly cardService = inject(CardService);
@@ -28,26 +33,22 @@ export class JugadorComponents {
   selectedCard: any = null;
   modalVisible: boolean = false;
   cards: CardModel[] = [];
+  arregloCartas: [] = [];
+  cardSelect: CardModel[] = [];
+  mensaje = 'Selecciona una carta'
+  selectedCardIndex: number = 0;
 
-
-    arregloCartas:[] = [];
-
-    cardSelect: CardModel[] = [];
-
-    
-  Card(event: CardModel){
-    this.cardSelect.push(event); 
+  Card(event: CardModel) {
+    this.cardSelect.push(event);
     console.log(this.cardSelect);
   }
-
-
 
   openCardModal() {
     if (this.models?.playerId !== undefined) {
       this.deckService.getDecksByPlayer(this.models.playerId).subscribe({
         next: (data) => {
           this.cards = data.map(deck => deck.card);
-          // console.log(data);
+          this.selectedCardIndex = 0; // Reset selection
           this.modalVisible = true;
         },
         error: (err) => {
@@ -59,14 +60,19 @@ export class JugadorComponents {
     }
   }
 
-
-
   closeModal() {
     this.modalVisible = false;
     this.selectedCard = null;
+    this.selectedCardIndex = 0;
   }
 
-
+  selectCard(index: number, card: CardModel) {
+    this.mensaje = '';
+    this.selectedCardIndex = index;
+    this.selectedCard = card;
+    this.Card(card);
+    console.log('Carta seleccionada:', card);
+  }
 
   ngOnInit(): void {
     if (!this.cards) {
@@ -77,6 +83,13 @@ export class JugadorComponents {
     }
   }
 
+  SeleccionarAtributo(event: any) {
+    this.atributo = event;
+  }
+
+  pasarRonda() {
+    this.emitirRonda.emit()
+  }
 
   // handleAttributeSelection(event: { card: CardModel }) {
   //   const { card } = event;

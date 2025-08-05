@@ -7,17 +7,17 @@ import { MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-add-player-modal',
   imports: [
-        CommonModule,
-      FormsModule,
-      MatButtonModule
+    CommonModule,
+    FormsModule,
+    MatButtonModule
   ],
   templateUrl: './add-player-modal.html',
   styleUrl: './add-player-modal.css'
 })
 export class AddPlayerModal {
- playerName = '';
+  playerName = '';
 
-  constructor(public dialogRef: MatDialogRef<AddPlayerModal>) {}
+  constructor(public dialogRef: MatDialogRef<AddPlayerModal>) { }
 
   onSubmit(): void {
     if (this.playerName.trim()) {
@@ -26,6 +26,6 @@ export class AddPlayerModal {
   }
 
   onClose(): void {
-  this.dialogRef.close();
-}
+    this.dialogRef.close();
+  }
 }

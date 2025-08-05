@@ -7,5 +7,9 @@ namespace Business.Interfases
     {
         //Task<IEnumerable<DeckDto>> GetDecksAsync();
         Task<IEnumerable<DeckDto>> GetDecksByPlayerAsync(int playerId);
+
+        //Eliminar todos los masos luego de finalizar una partida
+        Task<int> DeleteAllDecks();
+
     }
 }

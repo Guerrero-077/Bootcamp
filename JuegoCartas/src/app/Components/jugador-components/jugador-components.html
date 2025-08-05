@@ -1,39 +1,56 @@
 <div class="player-card" (click)="openCardModal()">
-    <div class="score-section">
-        <span class="star">⭐</span>
-        <span class="score">{{ models?.winner }}</span>
-    </div>
+  <div class="score-section">
+    <span class="star">⭐</span>
+    <span class="score">{{ models?.winner }}</span>
+  </div>
 
-    <div class="player-info">
-        <div class="avatar" >
-            <img [src]="'/assets/perfil.png'" [alt]="'avatar'" class="avatar-img">
-        </div>
-        <div class="name-badge">
-            {{ models?.playerName }}
-        </div>
+  <div class="player-info">
+    <div class="avatar">
+      <img [src]="'/assets/perfil.png'" [alt]="'avatar'" class="avatar-img">
     </div>
+    <div class="name-badge">
+      {{ models?.playerName }}
+    </div>
+  </div>
 
-    <div class="cards-section" (click)="openCardModal()">
-        <div class="cards-container">
-            <div class="card" *ngFor="let i of cardIndexes; let index = index"
-                [style.z-index]="cardIndexes.length - index" [style.left.px]="index * 8">
-                8
-            </div>
-        </div>
+  <div class="cards-section">
+    <div class="cards-container">
+      <div class="card" *ngFor="let i of cardIndexes; let index = index"
+        [style.z-index]="cardIndexes.length - index"
+        [style.left.px]="index * 8">
+        8
+      </div>
     </div>
+  </div>
 </div>
 
-<div class="modal-backdrop" *ngIf="modalVisible">
-    <div class="modal-content">
-        <h3>Cartas de {{ models?.playerName }}</h3>
-        <!-- <button class="close-btn" (click)="c()">×</button> -->
-        <ng-content>
-            <app-card-component [cards]="cards" layout="horizontal" (cardSelected)="Card($event)" (click)="closeModal()"></app-card-component>
+<div class="atributo" *ngIf="atributo">
+  <div class="atributo-nombre">{{ atributo.nombre }}</div>
+  <div class="atributo-valor">{{ atributo.valor }}</div>
+</div>
 
-        </ng-content>
+
+<div class="modal-backdrop" *ngIf="modalVisible">
+  <div>
+    <h3 class="modal-title">Turno de {{ models?.playerName }}</h3>
+    <div class="mensaje">{{mensaje}}</div>
+    <div class="modal-content">
+      <div class="cards-scroll-container"
+        [style.scroll-snap-type]="'x mandatory'">
+        <app-card-component *ngFor="let card of cards; let i = index"
+          (clickAtributo)="SeleccionarAtributo($event)"
+          [card]="card"
+          class="card-item"
+          [class.active]="selectedCardIndex === i"
+          [attr.data-index]="i"
+          (click)="selectCard(i, card)">
+        </app-card-component>
+      </div>
     </div>
+    <button mat-flat-button (click)="pasarRonda()">Continuar</button>
+  </div>
 </div>
 
 <!-- <app-simple-modal-component [visible]="modalVisible" (close)="closeModal()"> -->
-        <!-- (attributeSelected)="handleAttributeSelection($event)"></app-card-component> -->
+<!-- (attributeSelected)="handleAttributeSelection($event)"></app-card-component> -->
 <!-- </app-simple-modal-component> -->

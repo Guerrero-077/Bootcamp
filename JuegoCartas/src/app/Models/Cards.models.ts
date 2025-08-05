@@ -7,4 +7,6 @@ export interface CardModel {
     appearances: number;
     iq:          number;
     resistance:  number;
+
+    
 }

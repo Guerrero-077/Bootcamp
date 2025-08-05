@@ -20,4 +20,8 @@ export class DeckService {
     return this.http.get<DeckModel[]>(`${this.urlBase}/player/${playerId}`);
   }
 
+  deleteAllDecks(){
+    return this.http.delete(`${this.urlBase}/DeleteAll`);
+  }
+
 }

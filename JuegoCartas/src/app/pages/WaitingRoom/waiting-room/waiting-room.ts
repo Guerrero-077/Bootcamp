@@ -8,31 +8,27 @@ import { AddPlayerModal } from '../../../Components/add-player-modal/add-player-
 import Swal from 'sweetalert2';
 import { GameService } from '../../../Service/Game/game-service';
 import { insertImport } from '@angular/cdk/schematics';
-
-
-interface User {
-  id: number;
-  name: string;
-  avatar: string; // Opcional para iconos personalizados
-}
+import { Player } from '../../../Models/Player.models';
+import { DeckService } from '../../../Service/Deck/deck-service';
 
 @Component({
   selector: 'app-waiting-room',
   imports: [
-        CommonModule,
+    CommonModule,
     MatButtonModule, MatIconModule
   ],
   templateUrl: './waiting-room.html',
   styleUrl: './waiting-room.css'
 })
 export class WaitingRoom implements OnInit {
-  users: User[] = [];
+  users: Player[] = [];
 
   constructor(
     private apiService: GeneralService,
     private dialog: MatDialog,
     private cdr: ChangeDetectorRef,
-    private game: GameService
+    private game: GameService,
+    private deckService: DeckService
   ) {
 
   }
@@ -73,34 +69,59 @@ export class WaitingRoom implements OnInit {
   }
 
   delete(id: number) {
-  Swal.fire({
-    title: '¿Estás seguro?',
-    text: 'Esta acción eliminará el jugador.',
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonText: 'Sí, eliminar',
-    cancelButtonText: 'Cancelar',
-  }).then((result) => {
-    if (result.isConfirmed) {
-      this.apiService.delete('Player', id).subscribe(() => {
-        this.cargarUsers();
-        Swal.fire('Eliminado', 'El jugador ha sido eliminado.', 'success');
-      });
-    }
-  });
-}
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Esta acción eliminará el jugador.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.apiService.delete('Player', id).subscribe(() => {
+          this.cargarUsers();
+          Swal.fire('Eliminado', 'El jugador ha sido eliminado.', 'success');
+        });
+      }
+    });
+  }
 
   startGame() {
+    if (this.users.length < 2 || this.users.length > 7) {
+      Swal.fire({
+        title: 'Cantidad inválida',
+        text: `El juego debe tener entre 2 y 7 jugadores para poder iniciar.`,
+        icon: 'warning',
+        confirmButtonText: 'Aceptar'
+      })
+    }
+    
+    this.apiService.getAll('Deck').subscribe((decks) => {
+      if (decks.length) {
+        this.deckService.deleteAllDecks().subscribe({
+          next: () => {
+            this.start();
+          },
+          error: (error) => {
+            console.error('Error al eliminar los decks:', error);
+          }
+        });
+      } else {
+        this.start();
+      }
+    });
+
+  }
+
+  start() {
     this.game.CreateGame().subscribe((data) => {
       if (data.success) {
         Swal.fire({
           title: 'Juego Iniciado',
-          text: `El juego ha comenzado con ID: ${data.gameId}`,
+          text: `El juego ha comenzado`,
           icon: 'success',
           confirmButtonText: 'Aceptar'
         }).then(() => {
-          // Aquí puedes redirigir a la página del juego o realizar otra acción
-          // window.location.href = `/game/${data.gameId}`;
           window.location.href = `/game`;
         });
       } else {
@@ -120,5 +141,7 @@ export class WaitingRoom implements OnInit {
       });
     }
     );
+
   }
+
 }

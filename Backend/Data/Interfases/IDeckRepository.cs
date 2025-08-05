@@ -8,5 +8,9 @@ namespace Data.Interfases
         Task<IEnumerable<Deck>> GetDecksByPlayerIdAsync(int playerId);
         Task<List<Deck>> GetDecksBygameWithCardAndPlayer(int gameId);
         Task AddRangeAsync(IEnumerable<Deck> decks);
+
+        //Eliminar todos los masos luego de finalizar una partida
+         Task<int> DeleteAllDecks();
+
     }
 }

@@ -28,5 +28,12 @@ namespace Business.Implementations
             var decks = await _deckRepository.GetDecksByPlayerIdAsync(playerId);
             return decks.Adapt<IEnumerable<DeckDto>>();
         }
+
+        public async Task<int> DeleteAllDecks()
+        {
+            var rowsAffected = await _deckRepository.DeleteAllDecks();
+            return rowsAffected;
+        }
+
     }
 }

@@ -686,9 +686,6 @@ namespace Entity.Migrations
                     b.Property<int>("CardId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CardId")
-                        .HasColumnType("int");
-
                     b.Property<int>("GamePlayerId")
                         .HasColumnType("int");
 
@@ -827,20 +824,19 @@ namespace Entity.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Rooms");
-                });
+                    b.HasIndex("GameId");
 
-            modelBuilder.Entity("Entity.Models.Card", b =>
-                {
-                    b.HasOne("Entity.Models.Deck", "Decks")
-                        .WithMany("Card")
-                        .HasForeignKey("DeckId");
-
-                    b.Navigation("Decks");
+                    b.ToTable("Rounds");
                 });
 
             modelBuilder.Entity("Entity.Models.Deck", b =>
                 {
+                    b.HasOne("Entity.Models.Card", "Card")
+                        .WithMany("Decks")
+                        .HasForeignKey("CardId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Entity.Models.GamePlayer", "GamePlayer")
                         .WithMany("Decks")
                         .HasForeignKey("GamePlayerId")
@@ -916,9 +912,11 @@ namespace Entity.Migrations
                     b.Navigation("Moves");
                 });
 
-            modelBuilder.Entity("Entity.Models.Deck", b =>
+            modelBuilder.Entity("Entity.Models.Game", b =>
                 {
-                    b.Navigation("Card");
+                    b.Navigation("GamePlayers");
+
+                    b.Navigation("Rounds");
                 });
 
             modelBuilder.Entity("Entity.Models.GamePlayer", b =>

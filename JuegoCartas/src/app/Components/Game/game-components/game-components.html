@@ -1,7 +1,8 @@
 <div class="flex" style="width: 100%; height: auto;">
-    <app-jugador-components *ngFor="let item of gamePlayers" [models]="item" />
+  ronda
+    <app-jugador-components (emitirRonda)="FinalizarRonda()" *ngFor="let item of gamePlayers" [models]="item" />
 </div>
 
-<div class="hola"> 
-    
+<div class="hola">
+
 </div>

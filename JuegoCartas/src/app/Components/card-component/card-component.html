@@ -12,17 +12,17 @@
     </mat-card>
 </div> -->
 
-<div [ngClass]="layout === 'horizontal' ? 'card-container-horizontal' : 'card-container-grid'">
-    <!-- <mat-card class="game-card" *ngFor="let card of cards" (click)="onAttributeClick(card)"> -->
-    <mat-card class="game-card" *ngFor="let card of cards" (click)="getById(card.id)">
-        <img class="game-card-img" mat-card-image [src]="card.url" alt="Card image" />
-        <div class="grid">
-            <p class="texto" >Fuerza: {{ card.force }}</p>
-            <p class="texto"> {{ card.speed }}</p>
-            <h2 class="texto" >IQ: {{ card.iq }}</h2>
-            <p class="texto" >Popularidad: {{ card.popularity }}</p>
-            <p class="texto" >Resistencia: {{ card.resistance }}</p>
-            <p class="texto" >Apariciones: {{ card.appearances }}</p>
-        </div>
-    </mat-card>
-</div>
+<!-- <div [ngClass]="layout === 'horizontal' ? 'card-container-horizontal' : 'card-container-grid'"> -->
+<!-- <mat-card class="game-card" *ngFor="let card of cards" (click)="onAttributeClick(card)"> -->
+<mat-card class="game-card">
+  <img class="game-card-img" mat-card-image [src]="card.url" alt="Card image" />
+  <div class="grid">
+    <p
+      class="texto"
+      *ngFor="let atributo of atributos"
+      (click)="mostrarInfo(atributo.nombre, card[atributo.key])">
+      {{ atributo.nombre }}: {{ card[atributo.key] }}
+    </p>
+  </div>
+</mat-card>
+<!-- </div> -->
