@@ -36,13 +36,13 @@ export class JugadorComponents {
   // Modelos
   @Input() models?: GamePlayerModel;
   selectedCard: any = null;
+  turnMessageVisible = false;
   modalVisible: boolean = false;
   cards: CardModel[] = [];
   arregloCartas: [] = [];
   cardSelect: CardModel[] = [];
   selectedCardIndex: number = 0;
-
-  // cardSelect: CardModel[] = [];
+  @Input() cartasDeshabilitadas: { id: number, deshabilitada: boolean }[] = [];
 
 
   @Output() cardSelected = new EventEmitter<GamePlayerViewModel>();
@@ -90,21 +90,20 @@ export class JugadorComponents {
     }
   }
 
- turnMessageVisible = false;
 
-ngOnChanges() {
-  this.closeModal();
+  ngOnChanges() {
+    this.closeModal();
 
-  if (this.models?.id == this.currentTurnPlayerId) {
-    this.turnMessageVisible = true; // mostrar mensaje
-    this.openCardModal();
+    if (this.models?.id == this.currentTurnPlayerId) {
+      this.turnMessageVisible = true; // mostrar mensaje
+      this.openCardModal();
 
-    // ocultarlo después de 2.5 segundos
-    setTimeout(() => {
-      this.turnMessageVisible = false;
-    }, 2500);
+      // ocultarlo después de 2.5 segundos
+      setTimeout(() => {
+        this.turnMessageVisible = false;
+      }, 2500);
+    }
   }
-}
 
   SeleccionarAtributo(event: any) {
     this.atributo = event.nombre;
@@ -121,5 +120,11 @@ ngOnChanges() {
       this.emitirRonda.emit()
     }
 
+  }
+
+
+  isCartaDeshabilitada(cardId: number): boolean {
+    const carta = this.cartasDeshabilitadas.find(c => c.id === cardId);
+    return carta?.deshabilitada ?? false;
   }
 }

@@ -4,6 +4,7 @@
     class="player-card" [class.turno]="item?.id == currentTurnPlayerId"
     [currentTurnPlayerId]="currentTurnPlayerId" (emitirRonda)="FinalizatTurno(item)"
     (emitirAtributo)="atributoRonda = $event"
+    [cartasDeshabilitadas]="cartasDeshabilitadas"
     *ngFor="let item of gamePlayers" [models]="item" />
 </div>
 

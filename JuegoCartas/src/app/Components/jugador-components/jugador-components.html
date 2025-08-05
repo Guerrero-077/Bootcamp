@@ -18,14 +18,14 @@
       <div class="card" *ngFor="let i of cardIndexes; let index = index"
         [style.z-index]="cardIndexes.length - index"
         [style.left.px]="index * 8">
-        {{cards.length  || '?'}}
+        {{cards.length || '?'}}
       </div>
     </div>
   </div>
 </div>
 <!-- Mensaje grande de turno -->
 <div class="turn-message" *ngIf="turnMessageVisible">
-   ¡Es tu tuno, {{ models?.playerName }}!
+  ¡Es tu tuno, {{ models?.playerName }}!
 </div>
 
 <div class="atributo" *ngIf="atributo">
@@ -45,6 +45,7 @@
           [card]="card"
           class="card-item"
           [class.active]="selectedCardIndex === i"
+          [class.deshabilitada]="isCartaDeshabilitada(card.id)"
           [attr.data-index]="i"
           (click)="selectCard(i, card)">
         </app-card-component>

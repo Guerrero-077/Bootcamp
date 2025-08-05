@@ -8,6 +8,7 @@ import { CardModel } from "../../../Models/Cards.models";
 import { CardService } from "../../../Service/Card/card-service";
 import { DeckService } from "../../../Service/Deck/deck-service";
 import { GamePlayerViewModel } from "../../../Models/GamePlayerViewModel .model";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-game-components',
@@ -26,9 +27,9 @@ export class GameComponents implements OnInit {
   gamePlayers: GamePlayerModel[] = [];
   currentTurnPlayerId: number | null = null;
   jugadoresQueJugaron: number[] = [];
-  PlayerCard: GamePlayerViewModel[] = [];
-  atributoRonda!: string;
-
+  playerCard: GamePlayerViewModel[] = [];
+  atributoRonda!: any;
+  cartasDeshabilitadas: any[] = [];
 
   //Servicios
   gamePlayerService = inject(GamePlayerService);
@@ -51,7 +52,9 @@ export class GameComponents implements OnInit {
 
     if (!this.Cards) {
       this.cardService.getAll().subscribe({
-        next: (data) => (this.cardsPlayer = data),
+        next: (data) => (
+          this.cardsPlayer = data
+        ),
         error: (err) => console.error('Error al cargar cartas', err),
       });
 
@@ -78,10 +81,14 @@ export class GameComponents implements OnInit {
   }
 
   CartaSeleccionada(event: any) {
-    this.PlayerCard = event;
+    this.playerCard.push(event);
     this.cardSelect.push(event.card);
 
-
+    let cartaId = event.card?.id;
+    if (cartaId) {
+      this.cardsPlayer = this.cardsPlayer.filter(carta => carta.card.id !== cartaId);
+    }
+    this.cartasDeshabilitadas.push({ id: cartaId, deshabilitada: true });
   }
 
   //Método para cerrar modal
@@ -93,7 +100,7 @@ export class GameComponents implements OnInit {
   eliminarCartaJugador(playerId: number): void {
     const index = this.cardsPlayer.findIndex(p => p.playerId === playerId);
     if (index !== -1) {
-      this.PlayerCard.splice(index, 1); // Remueve de cartas jugadas
+      this.playerCard.splice(index, 1); // Remueve de cartas jugadas
       this.cardSelect.splice(index, 1); // Remueve del array de selección
     }
   }
@@ -102,45 +109,88 @@ export class GameComponents implements OnInit {
     this.asignarPuntajeGanador();
     this.roundNumber++;
     this.jugadoresQueJugaron = [];
-    this.PlayerCard = [];
+    this.playerCard = [];
     this.cardSelect = [];
     this.iniciarRonda();
+    if (this.roundNumber >= 8) {
+      Swal.fire({
+        title: 'Juego finalizado!',
+        // text: `🏆 El ganador es: ${jugadorGanador.player.playerName}`,
+        icon: 'success',
+        confirmButtonText: 'Aceptar'
+      });
+    }
   }
-  asignarPuntajeGanador(): void {
-    if (!Array.isArray(this.PlayerCard) || this.PlayerCard.length === 0) return;
 
-    // Determinar carta ganadora según el atributo de la ronda
-    const cartaGanadora = this.PlayerCard.reduce((prev, curr) => {
-      const valorPrev = prev.card?.[this.atributoRonda as keyof CardModel] ?? 0;
-      const valorCurr = curr.card?.[this.atributoRonda as keyof CardModel] ?? 0;
-      return valorCurr > valorPrev ? curr : prev;
+
+  asignarPuntajeGanador(): void {
+    const atributoMap: { [nombre: string]: string } = {
+      'Fuerza': 'force',
+      'Velocidad': 'speed',
+      'IQ': 'iq',
+      'Popularidad': 'popularity',
+      'Resistencia': 'resistance',
+      'Apariciones': 'appearances'
+    };
+
+    let atributoKey = atributoMap[this.atributoRonda.nombre];
+    if (!atributoKey) {
+      console.error('Atributo no reconocido:', this.atributoRonda);
+      return;
+    }
+
+    let cartaGanadora = this.cardSelect.reduce((max, actual) => {
+      return (actual as any)[atributoKey] > (max as any)[atributoKey] ? actual : max;
     });
 
-    // Sumar punto al jugador ganador
-    const jugadorGanador = this.gamePlayers.find(
-      p => p.playerId === cartaGanadora?.player?.playerId
-    );
-    if (jugadorGanador) {
-      jugadorGanador.winner = (jugadorGanador.winner || 0) + 1;
+    let puntaje = (cartaGanadora as any)[atributoKey]
+
+    let jugadorGanador = this.playerCard.find(p => p.card?.id === cartaGanadora.id);
+
+    if (jugadorGanador?.player?.playerName) {
+      jugadorGanador.player.winner += puntaje;
+      Swal.fire({
+        title: '¡Ronda finalizada!',
+        text: `🏆 El ganador es: ${jugadorGanador.player.playerName}: ${puntaje} `,
+        icon: 'success',
+        confirmButtonText: 'Aceptar'
+      });
     }
 
     // Eliminar cartas de la ronda
-    this.PlayerCard = [];
+    this.playerCard = [];
   }
 
 
-  FinalizatTurno(jugador: GamePlayerModel) {
+
+  FinalizatTurno(jugador: GamePlayerModel): void {
     if (!jugador?.playerId) return;
 
+    // Solo agregamos el jugador al arreglo mientras no se encuentre
     if (!this.jugadoresQueJugaron.includes(jugador.playerId)) {
       this.jugadoresQueJugaron.push(jugador.playerId);
     }
 
-    if (this.jugadoresQueJugaron.length >= this.gamePlayers.length) {
+    // Condicional
+    const todosJugaron = this.jugadoresQueJugaron.length === this.gamePlayers.length;
+
+    if (todosJugaron) {
       this.FinalizarRonda();
     } else {
-      this.iniciarRonda();
+      this.pasarTurnoAlSiguienteJugador();
     }
   }
+
+
+  pasarTurnoAlSiguienteJugador(): void {
+    const jugadoresRestantes = this.gamePlayers.filter(
+      p => !this.jugadoresQueJugaron.includes(p.playerId)
+    );
+
+    const siguienteJugador = jugadoresRestantes[0];
+
+    this.currentTurnPlayerId = siguienteJugador.id;
+  }
+
 }
 

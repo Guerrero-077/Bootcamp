@@ -338,3 +338,9 @@
     transform: translate(-50%, -40%);
   }
 }
+
+
+.card-item.deshabilitada {
+  opacity: 0.4;
+  pointer-events: none; /* opcional si no quieres que se pueda hacer clic */
+}
