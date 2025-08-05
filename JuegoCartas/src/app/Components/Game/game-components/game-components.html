@@ -1,8 +1,13 @@
+<div class="round">Ronda {{roundNumber}}</div>
 <div class="flex" style="width: 100%; height: auto;">
-  ronda
-    <app-jugador-components (emitirRonda)="FinalizarRonda()" *ngFor="let item of gamePlayers" [models]="item" />
+  <app-jugador-components (cardSelected)="CartaSeleccionada($event)"
+    class="player-card" [class.turno]="item?.id == currentTurnPlayerId"
+    [currentTurnPlayerId]="currentTurnPlayerId" (emitirRonda)="FinalizatTurno(item)"
+    (emitirAtributo)="atributoRonda = $event"
+    *ngFor="let item of gamePlayers" [models]="item" />
 </div>
 
-<div class="hola">
-
+<div class="cards-container">
+  <app-card-component *ngFor="let card of cardSelect;"
+    [card]="card" class="card"></app-card-component>
 </div>

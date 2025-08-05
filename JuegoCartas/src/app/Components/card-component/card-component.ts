@@ -12,6 +12,7 @@ import { CardService } from '../../Service/Card/card-service';
 })
 export class CardComponent {
 
+  //Servicios
   cardService = inject(CardService);
 
   @Input() card!: any;
@@ -53,34 +54,8 @@ export class CardComponent {
   }
 
 
-  // ngOnInit(): void {
-  //   if (!this.card) {
-  //     this.cardService.getAll().subscribe({
-  //       next: (data) => (this.card = data),
-  //       error: (err) => console.error('Error al cargar cartas', err),
-  //     });
-  //   }
-  // }
+  onCardClick(card: CardModel): void {
+    this.cardSelected.emit(card);
+    console.log("Carta emitida:", card);
+  }
 }
-
-
-// @Output() attributeSelected = new EventEmitter<{ card: CardModel; attribute: string }>();
-// @Output() attributeSelected = new EventEmitter<{ card: CardModel }>();
-
-
-//  @Output() cerrarModal = new EventEmitter<void>();
-
-//  cerrar() {
-//    this.cerrarModal.emit();
-//  }
-
-// onAttributeClick(card: CardModel): void {
-//   this.attributeSelected.emit({ card, attribute });
-//   this.attributeSelected.emit({ card});
-//   console.log('Card clicked:', card);
-//    this.cerrar();
-// }
-
-
-// private readonly cardService = inject(CardService);
-

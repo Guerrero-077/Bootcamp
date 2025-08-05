@@ -1,4 +1,4 @@
-<div class="player-card" (click)="openCardModal()">
+<div class="player-card">
   <div class="score-section">
     <span class="star">⭐</span>
     <span class="score">{{ models?.winner }}</span>
@@ -18,23 +18,26 @@
       <div class="card" *ngFor="let i of cardIndexes; let index = index"
         [style.z-index]="cardIndexes.length - index"
         [style.left.px]="index * 8">
-        8
+        {{cards.length  || '?'}}
       </div>
     </div>
   </div>
 </div>
+<!-- Mensaje grande de turno -->
+<div class="turn-message" *ngIf="turnMessageVisible">
+   ¡Es tu tuno, {{ models?.playerName }}!
+</div>
 
 <div class="atributo" *ngIf="atributo">
-  <div class="atributo-nombre">{{ atributo.nombre }}</div>
+  <div class="atributo-nombre">{{ atributo }}</div>
   <div class="atributo-valor">{{ atributo.valor }}</div>
 </div>
 
-
 <div class="modal-backdrop" *ngIf="modalVisible">
   <div>
-    <h3 class="modal-title">Turno de {{ models?.playerName }}</h3>
-    <div class="mensaje">{{mensaje}}</div>
+
     <div class="modal-content">
+
       <div class="cards-scroll-container"
         [style.scroll-snap-type]="'x mandatory'">
         <app-card-component *ngFor="let card of cards; let i = index"

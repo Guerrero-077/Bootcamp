@@ -3,13 +3,13 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-import { GeneralService } from '../../../Service/general/general-service';
-import { AddPlayerModal } from '../../../Components/add-player-modal/add-player-modal';
 import Swal from 'sweetalert2';
+import { AddPlayerModal } from '../../../Components/add-player-modal/add-player-modal';
 import { GameService } from '../../../Service/Game/game-service';
 import { insertImport } from '@angular/cdk/schematics';
 import { Player } from '../../../Models/Player.models';
 import { DeckService } from '../../../Service/Deck/deck-service';
+import { GeneralService } from '../../../Service/general/general-service';
 
 @Component({
   selector: 'app-waiting-room',
@@ -95,7 +95,7 @@ export class WaitingRoom implements OnInit {
         confirmButtonText: 'Aceptar'
       })
     }
-    
+
     this.apiService.getAll('Deck').subscribe((decks) => {
       if (decks.length) {
         this.deckService.deleteAllDecks().subscribe({

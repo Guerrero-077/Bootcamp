@@ -7,14 +7,14 @@
     </div>
 
     <div class="card user-card" *ngFor="let user of users">
-      <!-- <img [src]="user.avatar" alt="Avatar" /> -->
+      <img [src]="'/assets/perfil.png'" alt="Avatar" />
       <p>{{ user.name }}</p>
       <div class="icons">
         <!-- <button matIconButton >
           <mat-icon>edit</mat-icon>
         </button> -->
-         <button matIconButton (click)="delete(user.id)">
-          <mat-icon>remove</mat-icon>
+        <button matIconButton (click)="delete(user.id)">
+          <mat-icon style="color: rgba(255, 39, 39, 0.555);">delete</mat-icon>
         </button>
       </div>
     </div>
